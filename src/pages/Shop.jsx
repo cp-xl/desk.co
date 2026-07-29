@@ -33,7 +33,7 @@ export default function Shop() {
         <Reveal variant="fade-up">
           <h1 className="font-display text-[44px] sm:text-[60px] leading-none text-charcoal">Shop</h1>
         </Reveal>
-        <p className="mt-4 text-[18px] leading-[1.6] text-charcoal/75 max-w-lg">
+        <p className="mt-4 text-[16px] leading-[1.65] text-charcoal/75 max-w-lg">
           The full list, in the order it landed. Narrow it by what the thing is, or by what
           you actually want to spend.
         </p>

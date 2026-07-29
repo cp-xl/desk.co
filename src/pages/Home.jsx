@@ -5,7 +5,6 @@ import CatalogGrid from '@/components/home/CatalogGrid';
 import ThinkingBand from '@/components/home/ThinkingBand';
 import TrustBar from '@/components/deskco/TrustBar';
 import Marquee from '@/components/deskco/Marquee';
-import FaqAccordion from '@/components/deskco/FaqAccordion';
 import { fetchProducts } from '@/lib/wixProducts';
 
 export default function Home() {
@@ -26,7 +25,6 @@ export default function Home() {
       <CatalogGrid products={products} loading={loading} />
       <Marquee />
       <ThinkingBand />
-      <FaqAccordion />
     </div>
   );
 }

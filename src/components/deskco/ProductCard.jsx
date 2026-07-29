@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
       <div className="pt-3">
         <p className="text-[10px] tracking-label text-maroon">{product.category}</p>
         <div className="mt-1 flex items-baseline justify-between gap-3">
-          <p className="text-[16px] leading-snug text-charcoal group-hover:text-maroon transition-colors">
+          <p className="text-[14px] leading-snug text-charcoal group-hover:text-maroon transition-colors">
             {product.name}
           </p>
           <p className="font-ui text-[12px] text-charcoal/70 shrink-0 tabular-nums">{product.priceDisplay}</p>

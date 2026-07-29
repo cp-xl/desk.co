@@ -15,14 +15,15 @@ export default function ThinkingBand() {
             </h2>
           </Reveal>
         </div>
-        <div className="space-y-5 text-[18px] leading-[1.65] text-charcoal/75">
+        <div className="space-y-5 text-[16px] leading-[1.65] text-charcoal/75">
           <p>
-            Most gift tech is bought in a hurry and gone by February. Ours gets ordered,
-            unboxed and lived with for a few weeks first. Plenty of it never makes the list.
+            Most gift tech is bought in a hurry and gone by February. This is the opposite of
+            that: a short list of finds that hold up, in the range where a gift still reads
+            as a decision.
           </p>
           <p>
-            What survives does one job well and still looks good on a desk a year later.
-            No bundles, no upsells, nothing here because a supplier had stock to move.
+            Everything here does one job well and still looks good on a desk a year later.
+            No bundles, no upsells, no aisle of near-identical boxes.
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 export const FAQ = [
   {
     q: 'Where does this stuff come from?',
-    a: 'Brands we can actually vouch for, plus a few small makers. If we would not use it, it is not listed.',
+    a: 'Specialist brands and small makers you will not see on a chain store shelf. Everything ships with a warranty.',
   },
   {
     q: 'How fast does it ship?',
@@ -22,8 +22,8 @@ export const FAQ = [
 ];
 
 export const HOW_IT_WORKS = [
-  { title: 'We buy it first', body: 'Nothing gets listed off a spec sheet. It gets used on a desk or in a bag.' },
-  { title: 'A drop, not a firehose', body: 'Stock lands in small batches. Easier to read, easier to gift.' },
+  { title: 'Not in the aisle', body: 'Tech the chain stores do not stock, at gift-sized prices.' },
+  { title: 'A short list', body: 'A small catalogue instead of a search bar. Easier to read, easier to gift.' },
   { title: 'Plain descriptions', body: 'What it does, what it costs, who it suits. You decide.' },
 ];
 

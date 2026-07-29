@@ -117,13 +117,13 @@ export default function ProductDetail() {
 
             {product.blurb && (
               <div className="mt-8 border-t border-charcoal/15 pt-5">
-                <p className="text-[17px] leading-[1.65] text-charcoal/80">{product.blurb}</p>
+                <p className="text-[16px] leading-[1.7] text-charcoal/80">{product.blurb}</p>
               </div>
             )}
 
             <div className="mt-6 border-t border-charcoal/15 pt-5">
-              <p className="text-[11px] tracking-label text-charcoal/40 mb-2">Why it made the cut</p>
-              <p className="text-[14px] leading-relaxed text-charcoal/70">
+              <p className="text-[11px] tracking-label text-charcoal/40 mb-2">Why it is on the list</p>
+              <p className="text-[15px] leading-[1.65] text-charcoal/70">
                 It does one thing properly, it looks like someone designed it on purpose, and it
                 lands in the range where a gift still reads as a decision.
               </p>

@@ -13,7 +13,7 @@ export default function Footer() {
               DESCKO<span className="text-amber">.</span>
             </div>
             <p className="mt-4 text-cream/60 text-sm leading-relaxed max-w-xs">
-              A short list of good tech. Bought, used, then listed. Or not listed at all.
+              A short list of good tech. The stuff the chain stores never carry.
             </p>
             <p className="mt-6 text-[11px] tracking-label text-amber">
               Gear with personality, not aisle filler.

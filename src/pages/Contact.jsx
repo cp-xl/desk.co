@@ -13,7 +13,7 @@ export default function Contact() {
           <Reveal variant="fade-up">
             <h1 className="font-display text-[44px] sm:text-[56px] leading-none text-charcoal">Say something</h1>
           </Reveal>
-          <p className="mt-4 text-[18px] leading-[1.6] text-charcoal/75 max-w-md">
+          <p className="mt-4 text-[16px] leading-[1.65] text-charcoal/75 max-w-md">
             Order questions, returns, or a product we should look at. A person reads these.
           </p>
 

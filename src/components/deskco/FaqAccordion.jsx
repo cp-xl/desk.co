@@ -16,13 +16,13 @@ export default function FaqAccordion() {
             <li key={item.q} className="border-b border-charcoal/15">
               <button
                 onClick={() => setOpen(open === i ? -1 : i)}
-                className="w-full flex items-center justify-between gap-4 py-5 text-left text-[18px] text-charcoal hover:text-maroon transition-colors"
+                className="w-full flex items-center justify-between gap-4 py-5 text-left text-[16px] text-charcoal hover:text-maroon transition-colors"
               >
                 {item.q}
                 {open === i ? <Minus className="h-4 w-4 shrink-0" /> : <Plus className="h-4 w-4 shrink-0" />}
               </button>
               {open === i && (
-                <p className="pb-6 pr-8 text-[17px] leading-[1.65] text-charcoal/75">{item.a}</p>
+                <p className="pb-6 pr-8 text-[15px] leading-[1.7] text-charcoal/75">{item.a}</p>
               )}
             </li>
           ))}

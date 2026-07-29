@@ -4,8 +4,8 @@ import Reveal from '@/components/deskco/Reveal';
 
 const VALUES = [
   { title: 'A tight list', body: 'Under a hundred products, ever. If something better arrives, something leaves.' },
-  { title: 'Hand-picked', body: 'Bought, unboxed, used. Spec sheets are marketing, not evidence.' },
-  { title: 'A drop, not a firehose', body: 'Stock lands in small batches, so the whole list stays readable in a coffee break.' },
+  { title: 'Not in the aisle', body: 'Things the big chain stores do not carry, at prices that still make sense as a gift.' },
+  { title: 'Readable in one sitting', body: 'The whole catalogue fits in a coffee break. No endless scroll, no filters you need.' },
   { title: 'No hype voice', body: 'We describe the thing. You decide if you want it.' },
 ];
 
@@ -21,7 +21,7 @@ export default function About() {
             Gear with personality, not aisle filler.
           </h1>
         </Reveal>
-        <div className="mt-8 max-w-xl space-y-5 text-[18px] leading-[1.65] text-charcoal/75">
+        <div className="mt-8 max-w-xl space-y-5 text-[16px] leading-[1.7] text-charcoal/75">
           <p>
             Descko is for the person who has drawn a name out of a hat, has a birthday in
             four days, or just likes good objects. You know the walk down the aisle at the
@@ -36,14 +36,14 @@ export default function About() {
             The people who buy here are not chasing specs. They want one good thing that
             arrives on time, looks considered on a desk, and gets used past January.
           </p>
-          <p>Nothing is on the list because a supplier had stock.</p>
+          <p>Short list, clear prices, no aisle to walk.</p>
         </div>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {VALUES.map((v, i) => (
             <Reveal key={v.title} variant="fade-up" delay={i * 70} className="border-t border-charcoal/15 pt-5">
               <p className="font-display text-2xl text-charcoal">{v.title}</p>
-              <p className="mt-2 text-[16px] leading-[1.6] text-charcoal/75">{v.body}</p>
+              <p className="mt-2 text-[15px] leading-[1.65] text-charcoal/75">{v.body}</p>
             </Reveal>
           ))}
         </div>
