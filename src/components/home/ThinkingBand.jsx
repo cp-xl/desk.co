@@ -17,7 +17,7 @@ export default function ThinkingBand() {
         </div>
         <div className="space-y-5 text-[15px] leading-relaxed text-charcoal/70">
           <p>
-            Most gift tech is an afterthought — plastic, replaceable, forgotten by February.
+            Most gift tech is an afterthought: plastic, replaceable, forgotten by February.
             We keep the opposite: a short, deliberate list, bought and used before it goes up.
           </p>
           <p>

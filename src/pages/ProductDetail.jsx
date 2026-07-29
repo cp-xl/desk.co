@@ -132,7 +132,7 @@ export default function ProductDetail() {
             {product.variants.length > 1 && (
               <div className="mt-8">
                 <p className="text-[11px] tracking-label text-charcoal/50 mb-3">
-                  {product.optionName || 'Option'} — {variant}
+                  {product.optionName || 'Option'}: {variant}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {product.variants.map((v) => (

@@ -48,7 +48,7 @@ export default function HeroSplit({ leadProduct }) {
             </Reveal>
             <Reveal variant="fade-up" delay={160}>
               <p className="mt-7 max-w-md text-[15px] leading-relaxed text-charcoal/70">
-                A small catalogue of tech with a bit of personality — the kind your local
+                A small catalogue of tech with a bit of personality. The kind your local
                 electronics chain does not stock. Each one does a job properly and stays
                 interesting while it does it.
               </p>

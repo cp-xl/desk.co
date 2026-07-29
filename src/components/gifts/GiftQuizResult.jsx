@@ -10,7 +10,7 @@ export default function GiftQuizResult({ archetype, pronounWord, picks, onRestar
         I think {pronounWord} {archetype.verdict}.
       </h3>
       <p className="mt-4 text-[14px] text-cream/60 max-w-lg">
-        Reads like <span className="text-cream">{archetype.name}</span> — {archetype.line}
+        Reads like <span className="text-cream">{archetype.name}</span>. {archetype.line}
       </p>
 
       {picks.length > 0 ? (

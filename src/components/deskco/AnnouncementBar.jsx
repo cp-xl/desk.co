@@ -6,7 +6,7 @@ export default function AnnouncementBar() {
     <div className="bg-charcoal text-cream">
       <div className="mx-auto max-w-focus px-4 sm:px-6">
         <div className="flex items-center justify-center gap-6 py-2.5 text-[11px] sm:text-[12px] tracking-label">
-          <span className="hidden sm:inline">Free shipping over $80 — Australian orders</span>
+          <span className="hidden sm:inline">Free shipping over $80 on Australian orders</span>
           <span className="sm:hidden">Free shipping over $80</span>
           <span className="h-3 w-px bg-amber/40" />
           <Link to="/gifts" className="text-amber hover:underline underline-offset-4">

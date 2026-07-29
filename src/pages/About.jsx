@@ -30,7 +30,7 @@ export default function About() {
           <p>
             So we keep a short list instead. Speakers, earbuds, smart rings, handhelds, mics,
             mounts, portable power, solar. Roughly $20 to $1,000, most of it between $30 and
-            $80 — the range where a present still reads as a decision rather than an errand.
+            $80. That is the range where a present still reads as a decision rather than an errand.
           </p>
           <p>
             The people who buy here are not chasing specs. They want one good thing that

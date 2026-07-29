@@ -19,7 +19,7 @@ export const ARCHETYPES = [
     verdict: 'like something that lives in a backpack and still works on day three',
     guide: [
       'They charge things in airports and cafés and lose exactly one cable per trip.',
-      'Power banks, solar, small speakers, earbuds — gear rated for being thrown in a bag.',
+      'Power banks, solar, small speakers, earbuds. Gear rated for being thrown in a bag.',
       'Avoid anything fragile, mains-only, or the size of a hardback book.',
     ],
     match: (p) => ['Power', 'Audio'].includes(p.category),
@@ -28,7 +28,7 @@ export const ARCHETYPES = [
     id: 'audiophile',
     name: 'The One With Opinions',
     line: 'They will comment on it. That is the point.',
-    verdict: 'have thoughts about this — good ones, for once',
+    verdict: 'have thoughts about this. Good ones, for once',
     guide: [
       'They have told you, unprompted, why your earbuds are wrong.',
       'Sound gear, mics, anything where the spec sheet is part of the gift.',
@@ -54,7 +54,7 @@ export const ARCHETYPES = [
     line: 'Reaction time is a personality trait.',
     verdict: 'like something with buttons, and use it the same night',
     guide: [
-      'Handhelds, controllers, keys — gear that gets picked up daily, not displayed.',
+      'Handhelds, controllers, keys. Gear that gets picked up daily, not displayed.',
       'Screen time is not a concern here. Feel and latency are.',
       'Avoid anything that needs a subscription to be useful.',
     ],

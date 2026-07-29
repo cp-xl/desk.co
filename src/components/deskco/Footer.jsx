@@ -13,7 +13,7 @@ export default function Footer() {
               DESCKO<span className="text-amber">.</span>
             </div>
             <p className="mt-4 text-cream/60 text-sm leading-relaxed max-w-xs">
-              A short list of good tech. Bought, used, then listed — or not listed at all.
+              A short list of good tech. Bought, used, then listed. Or not listed at all.
             </p>
             <p className="mt-6 text-[11px] tracking-label text-amber">
               Gear with personality, not aisle filler.
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-6 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] tracking-label text-cream/40">© {year} Descko — Australia</p>
+          <p className="text-[11px] tracking-label text-cream/40">© {year} Descko, Australia</p>
           <p className="text-[11px] tracking-label text-cream/40">A drop, not a firehose.</p>
         </div>
       </div>

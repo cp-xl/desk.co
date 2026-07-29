@@ -37,7 +37,7 @@ export default function GiftGuides() {
               <ul className="lg:col-span-8 space-y-3">
                 {a.guide.map((point) => (
                   <li key={point} className="flex gap-3 text-[14px] leading-relaxed text-charcoal/70">
-                    <span className="text-maroon/60 shrink-0">—</span>
+                    <span className="text-maroon/60 shrink-0">/</span>
                     {point}
                   </li>
                 ))}
