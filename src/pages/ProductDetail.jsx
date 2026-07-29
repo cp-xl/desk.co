@@ -109,15 +109,15 @@ export default function ProductDetail() {
 
           <div className="lg:col-span-5">
             <p className="text-[11px] tracking-label text-maroon mb-3">{product.category}</p>
-            <h1 className="font-body text-[32px] sm:text-[38px] leading-tight text-charcoal">{product.name}</h1>
-            <p className="mt-3 text-2xl text-charcoal tabular-nums">{product.priceDisplay}</p>
+            <h1 className="font-body text-[34px] sm:text-[42px] leading-tight text-charcoal">{product.name}</h1>
+            <p className="mt-3 font-ui text-xl text-charcoal tabular-nums">{product.priceDisplay}</p>
             <p className="mt-2 text-[12px] tracking-label text-charcoal/50">
               {product.inStock ? 'In stock' : 'Not in stock yet.'}
             </p>
 
             {product.blurb && (
               <div className="mt-8 border-t border-charcoal/15 pt-5">
-                <p className="text-[15px] leading-relaxed text-charcoal/80">{product.blurb}</p>
+                <p className="text-[17px] leading-[1.65] text-charcoal/80">{product.blurb}</p>
               </div>
             )}
 
@@ -163,7 +163,7 @@ export default function ProductDetail() {
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="px-4 text-[14px] tabular-nums w-8 text-center">{quantity}</span>
+                <span className="px-4 font-ui text-[14px] tabular-nums w-8 text-center">{quantity}</span>
                 <button
                   onClick={() => setQuantity((q) => q + 1)}
                   className="p-2.5 text-charcoal hover:bg-charcoal/5 transition-colors"

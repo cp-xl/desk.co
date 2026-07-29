@@ -42,7 +42,7 @@ export default function CartPage() {
                           <p className="mt-1 text-[11px] tracking-label text-maroon">{item.variant}</p>
                         )}
                       </div>
-                      <p className="text-[14px] text-charcoal tabular-nums">
+                      <p className="font-ui text-[13px] text-charcoal tabular-nums">
                         ${(item.price * item.quantity).toFixed(0)}
                       </p>
                     </div>
@@ -55,7 +55,7 @@ export default function CartPage() {
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="px-3 text-[13px] tabular-nums">{item.quantity}</span>
+                        <span className="px-3 font-ui text-[13px] tabular-nums">{item.quantity}</span>
                         <button
                           onClick={() => setQuantity(item.key, item.quantity + 1)}
                           className="p-2 text-charcoal hover:bg-charcoal/5 transition-colors"

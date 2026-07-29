@@ -8,7 +8,7 @@ export default function InfoPage({ title, body }) {
       <div className="mx-auto max-w-focus px-4 sm:px-6 py-16 sm:py-24">
         <Link to="/" className="text-[11px] tracking-label text-maroon hover:underline">← Back to desk</Link>
         <h1 className="font-display text-[44px] sm:text-[56px] leading-none text-charcoal mt-6">{title}</h1>
-        <div className="mt-8 max-w-2xl space-y-4 text-[15px] leading-relaxed text-charcoal/70">
+        <div className="mt-8 max-w-2xl space-y-5 text-[18px] leading-[1.65] text-charcoal/75">
           {body.map((p, i) => <p key={i}>{p}</p>)}
         </div>
       </div>

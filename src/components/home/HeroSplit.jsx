@@ -47,10 +47,10 @@ export default function HeroSplit({ leadProduct }) {
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={160}>
-              <p className="mt-7 max-w-md text-[15px] leading-relaxed text-charcoal/70">
-                A small catalogue of tech with a bit of personality. The kind your local
-                electronics chain does not stock. Each one does a job properly and stays
-                interesting while it does it.
+              <p className="mt-7 max-w-md text-[18px] leading-[1.6] text-charcoal/75">
+                Under a hundred pieces of tech, all of it bought and used before it went up
+                here. Speakers, earbuds, handhelds, power. Mostly $30 to $80, which is the
+                range where a present still looks like a decision.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={240}>

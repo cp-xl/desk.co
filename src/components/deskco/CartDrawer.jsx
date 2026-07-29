@@ -71,7 +71,7 @@ export default function CartDrawer() {
                         <p className="font-display text-xl leading-none text-charcoal">{item.name}</p>
                         <p className="mt-1 text-[11px] tracking-label text-maroon">{item.variant}</p>
                       </div>
-                      <p className="text-[13px] text-charcoal">${(item.price * item.quantity).toFixed(0)}</p>
+                      <p className="font-ui text-[13px] text-charcoal tabular-nums">${(item.price * item.quantity).toFixed(0)}</p>
                     </div>
                     <div className="mt-3 flex items-center justify-between">
                       <div className="flex items-center border border-charcoal/20">
@@ -82,7 +82,7 @@ export default function CartDrawer() {
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="px-3 text-[13px] tabular-nums">{item.quantity}</span>
+                        <span className="px-3 font-ui text-[13px] tabular-nums">{item.quantity}</span>
                         <button
                           onClick={() => setQuantity(item.key, item.quantity + 1)}
                           className="p-1.5 text-charcoal hover:bg-charcoal/5 transition-colors"

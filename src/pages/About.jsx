@@ -21,7 +21,7 @@ export default function About() {
             Gear with personality, not aisle filler.
           </h1>
         </Reveal>
-        <div className="mt-8 max-w-xl space-y-4 text-[15px] leading-relaxed text-charcoal/70">
+        <div className="mt-8 max-w-xl space-y-5 text-[18px] leading-[1.65] text-charcoal/75">
           <p>
             Descko is for the person who has drawn a name out of a hat, has a birthday in
             four days, or just likes good objects. You know the walk down the aisle at the
@@ -43,7 +43,7 @@ export default function About() {
           {VALUES.map((v, i) => (
             <Reveal key={v.title} variant="fade-up" delay={i * 70} className="border-t border-charcoal/15 pt-5">
               <p className="font-display text-2xl text-charcoal">{v.title}</p>
-              <p className="mt-2 text-[14px] leading-relaxed text-charcoal/70">{v.body}</p>
+              <p className="mt-2 text-[16px] leading-[1.6] text-charcoal/75">{v.body}</p>
             </Reveal>
           ))}
         </div>

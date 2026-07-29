@@ -33,8 +33,9 @@ export default function Shop() {
         <Reveal variant="fade-up">
           <h1 className="font-display text-[44px] sm:text-[60px] leading-none text-charcoal">Shop</h1>
         </Reveal>
-        <p className="mt-4 text-[15px] text-charcoal/70 max-w-lg">
-          Everything we currently stand behind. Filter by what it is, or by what you want to spend.
+        <p className="mt-4 text-[18px] leading-[1.6] text-charcoal/75 max-w-lg">
+          The full list, in the order it landed. Narrow it by what the thing is, or by what
+          you actually want to spend.
         </p>
 
         <div className="mt-10 space-y-4">

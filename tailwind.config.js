@@ -68,7 +68,8 @@ module.exports = {
   		},
   		fontFamily: {
   			heading: ['Bebas Neue', 'Impact', 'sans-serif'],
-  			body: ['Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			body: ['Newsreader', 'Georgia', 'Times New Roman', 'serif'],
+  			ui: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
   			display: ['Bebas Neue', 'Impact', 'sans-serif'],
   			mono: ['var(--font-mono)']
   		},
