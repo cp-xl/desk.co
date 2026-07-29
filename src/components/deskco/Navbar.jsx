@@ -27,7 +27,7 @@ export default function Navbar() {
             <Menu className="h-5 w-5" />
           </button>
 
-          <Link to="/" className="font-display text-2xl sm:text-3xl tracking-label text-charcoal leading-none">
+          <Link to="/" className="font-display text-3xl sm:text-4xl tracking-[0.14em] text-charcoal leading-none">
             DESCKO<span className="text-maroon">.</span>
           </Link>
 
