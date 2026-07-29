@@ -8,9 +8,17 @@ export default async function(req: Request): Promise<Response> {
     const body = await req.json().catch(() => ({}));
     const { productId, slug } = body;
 
+    // Validate inputs to prevent path traversal
+    if (productId !== undefined && !/^[a-zA-Z0-9_-]{1,64}$/.test(productId)) {
+      return Response.json({ error: "Invalid productId" }, { status: 400 });
+    }
+    if (slug !== undefined && !/^[a-zA-Z0-9_-]{1,128}$/.test(slug)) {
+      return Response.json({ error: "Invalid slug" }, { status: 400 });
+    }
+
     // Single product by ID
     if (productId) {
-      const resp = await fetch(`https://www.wixapis.com/stores/v3/products/${productId}`, {
+      const resp = await fetch(`https://www.wixapis.com/stores/v3/products/${encodeURIComponent(productId)}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -24,7 +32,7 @@ export default async function(req: Request): Promise<Response> {
 
     // Single product by slug
     if (slug) {
-      const resp = await fetch(`https://www.wixapis.com/stores/v3/products/slugs/${slug}`, {
+      const resp = await fetch(`https://www.wixapis.com/stores/v3/products/slugs/${encodeURIComponent(slug)}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
