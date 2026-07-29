@@ -4,7 +4,11 @@ import { ArrowRight } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import Reveal from './Reveal';
 
-export default function Hero() {
+export default function Hero({ firstProduct }) {
+  const heroImage = firstProduct?.image || 'https://media.base44.com/images/public/6a69b073911fb2aa3df02219/fcddca1c9_generated_8222d48a.png';
+  const heroName = firstProduct?.name || 'The Sentinel';
+  const heroId = firstProduct?.id || null;
+
   return (
     <section className="relative bg-cream">
       {/* full-bleed top hairline */}
@@ -16,17 +20,16 @@ export default function Hero() {
             <Reveal variant="fade-up" className="relative w-full max-w-xl mx-auto">
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-charcoal/5">
                 <Image
-                  src="https://media.base44.com/images/public/6a69b073911fb2aa3df02219/fcddca1c9_generated_8222d48a.png"
-                  alt="The Sentinel — a matte black ceramic desk buddy"
+                  src={heroImage}
+                  alt={heroName}
                   className="h-full w-full object-cover"
                   fittingType="fill"
                 />
-                {/* spec corner labels */}
                 <span className="absolute top-4 left-4 text-[11px] tracking-label text-cream bg-charcoal/70 px-2 py-1">
                   No. 01
                 </span>
                 <span className="absolute bottom-4 left-4 text-[11px] tracking-label text-cream/90">
-                  The Sentinel
+                  {heroName}
                 </span>
               </div>
             </Reveal>
@@ -57,12 +60,14 @@ export default function Hero() {
                   Meet the buddies
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
-                <Link
-                  to="/product/sentinel"
-                  className="text-[12px] tracking-label text-charcoal/60 hover:text-maroon transition-colors underline-offset-4 hover:underline"
-                >
-                  Start with The Sentinel
-                </Link>
+                {heroId && (
+                  <Link
+                    to={`/product/${heroId}`}
+                    className="text-[12px] tracking-label text-charcoal/60 hover:text-maroon transition-colors underline-offset-4 hover:underline"
+                  >
+                    Start with {heroName}
+                  </Link>
+                )}
               </div>
             </Reveal>
           </div>

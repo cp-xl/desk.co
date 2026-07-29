@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/deskco/Hero';
-import ProductGrid from '@/components/deskco/ProductGrid';
 import GiftingSection from '@/components/deskco/GiftingSection';
 import Reveal from '@/components/deskco/Reveal';
-import { PRODUCTS } from '@/lib/products';
+import ProductCard from '@/components/deskco/ProductCard';
+import { fetchProducts } from '@/lib/wixProducts';
 
 function AboutStrip() {
   return (
@@ -33,22 +33,6 @@ function AboutStrip() {
                 No bundles, no upsells, no objects that exist only to fill a shelf.
               </p>
             </Reveal>
-            <Reveal variant="fade-up" delay={180}>
-              <div className="mt-8 grid grid-cols-3 gap-4 border-t border-charcoal/10 pt-6">
-                <div>
-                  <div className="font-display text-3xl text-charcoal">14</div>
-                  <div className="text-[11px] tracking-label text-charcoal/40 mt-1">Materials</div>
-                </div>
-                <div>
-                  <div className="font-display text-3xl text-charcoal">6</div>
-                  <div className="text-[11px] tracking-label text-charcoal/40 mt-1">Buddies</div>
-                </div>
-                <div>
-                  <div className="font-display text-3xl text-charcoal">0</div>
-                  <div className="text-[11px] tracking-label text-charcoal/40 mt-1">Filler</div>
-                </div>
-              </div>
-            </Reveal>
           </div>
         </div>
       </div>
@@ -56,12 +40,68 @@ function AboutStrip() {
   );
 }
 
+function ProductGridSection({ products, loading }) {
+  return (
+    <section className="bg-cream py-14 sm:py-20">
+      <div className="mx-auto max-w-focus px-4 sm:px-6">
+        <div className="flex items-end justify-between mb-10 sm:mb-14">
+          <div>
+            <Reveal variant="slide-in-left" className="text-[11px] tracking-label text-maroon mb-3">
+              The full lineup
+            </Reveal>
+            <Reveal variant="fade-up">
+              <h2 className="font-display text-[36px] sm:text-[44px] leading-none text-charcoal">
+                The Catalog
+              </h2>
+            </Reveal>
+          </div>
+          {!loading && (
+            <Reveal variant="fade-up" delay={100} className="hidden sm:block text-right">
+              <span className="text-[11px] tracking-label text-charcoal/40">
+                {products.length} {products.length === 1 ? 'buddy' : 'buddies'}
+              </span>
+            </Reveal>
+          )}
+        </div>
+
+        {loading ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="space-y-3">
+                <div className="aspect-square bg-charcoal/8 animate-pulse" />
+                <div className="h-3 bg-charcoal/8 animate-pulse w-2/3" />
+              </div>
+            ))}
+          </div>
+        ) : products.length === 0 ? (
+          <p className="text-charcoal/50 text-[14px]">No products found in store.</p>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6">
+            {products.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i} wide={i === 1} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProducts()
+      .then(setProducts)
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div>
-      <Hero />
+      <Hero firstProduct={products[0] || null} />
       <GiftingSection />
-      <ProductGrid products={PRODUCTS} title="The Catalog" kicker="Six buddies, one desk" />
+      <ProductGridSection products={products} loading={loading} />
       <AboutStrip />
     </div>
   );
