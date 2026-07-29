@@ -4,6 +4,8 @@ import ProductCard from '@/components/deskco/ProductCard';
 import Reveal from '@/components/deskco/Reveal';
 import { fetchProducts } from '@/lib/wixProducts';
 import { COLLECTIONS, pickForCollection } from '@/lib/collections';
+import GiftQuiz from '@/components/gifts/GiftQuiz';
+import GiftGuides from '@/components/gifts/GiftGuides';
 
 export default function Gifts() {
   const [products, setProducts] = useState([]);
@@ -29,7 +31,16 @@ export default function Gifts() {
         <p className="mt-4 text-[15px] text-charcoal/70 max-w-lg">
           Sorted by the person, not the category. Gift notes go on the packing slip, prices do not.
         </p>
+        <a
+          href="#quiz"
+          className="mt-7 inline-block bg-charcoal text-cream px-7 py-3.5 text-[12px] tracking-label hover:bg-maroon transition-colors"
+        >
+          Take the gift quiz
+        </a>
       </div>
+
+      <GiftQuiz products={products} />
+      <GiftGuides />
 
       {loading ? (
         <div className="mx-auto max-w-focus px-4 sm:px-6 pb-20 grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6">
