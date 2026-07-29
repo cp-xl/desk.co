@@ -9,8 +9,8 @@ export default function AnnouncementBar() {
           <span className="hidden sm:inline">Free shipping over $80 — Australian orders</span>
           <span className="sm:hidden">Free shipping over $80</span>
           <span className="h-3 w-px bg-amber/40" />
-          <Link to="/new-finds" className="text-amber hover:underline underline-offset-4">
-            New finds just landed
+          <Link to="/gifts" className="text-amber hover:underline underline-offset-4">
+            Something better than a gift card
           </Link>
         </div>
       </div>

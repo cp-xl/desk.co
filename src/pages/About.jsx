@@ -5,7 +5,7 @@ import Reveal from '@/components/deskco/Reveal';
 const VALUES = [
   { title: 'A tight list', body: 'Under a hundred products, ever. If something better arrives, something leaves.' },
   { title: 'Hand-picked', body: 'Bought, unboxed, used. Spec sheets are marketing, not evidence.' },
-  { title: 'A drop, not a firehose', body: 'New finds land in small batches so the list stays readable.' },
+  { title: 'A drop, not a firehose', body: 'Stock lands in small batches, so the whole list stays readable in a coffee break.' },
   { title: 'No hype voice', body: 'We describe the thing. You decide if you want it.' },
 ];
 
@@ -18,20 +18,25 @@ export default function About() {
         </Reveal>
         <Reveal variant="fade-up">
           <h1 className="font-display text-[44px] sm:text-[64px] leading-[0.95] text-charcoal max-w-2xl">
-            Gear with personality you won't get at JB Hi-Fi.
+            Gear with personality, not aisle filler.
           </h1>
         </Reveal>
         <div className="mt-8 max-w-xl space-y-4 text-[15px] leading-relaxed text-charcoal/70">
           <p>
-            Descko started because buying tech as a gift is miserable. You either spend too
-            little on something plastic, or too much on something everyone already owns.
+            Descko is for the person who has drawn a name out of a hat, has a birthday in
+            four days, or just likes good objects. You know the walk down the aisle at the
+            local electronics chain: two hundred boxes, all the same, none of them a gift.
           </p>
           <p>
-            So we keep a short list. Speakers, earbuds, smart rings, handhelds, mics, mounts,
-            portable power, solar. Roughly $20 to $1,000, most of it between $30 and $80 —
-            which happens to be the range where a present still feels like a decision.
+            So we keep a short list instead. Speakers, earbuds, smart rings, handhelds, mics,
+            mounts, portable power, solar. Roughly $20 to $1,000, most of it between $30 and
+            $80 — the range where a present still reads as a decision rather than an errand.
           </p>
-          <p>Nothing here is on the list because a supplier had stock.</p>
+          <p>
+            The people who buy here are not chasing specs. They want one good thing that
+            arrives on time, looks considered on a desk, and gets used past January.
+          </p>
+          <p>Nothing is on the list because a supplier had stock.</p>
         </div>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6">

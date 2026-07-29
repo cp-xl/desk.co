@@ -26,8 +26,8 @@ export default function Hero({ firstProduct }) {
             </Reveal>
             <Reveal variant="fade-up" delay={180}>
               <p className="mt-7 text-[15px] leading-relaxed text-charcoal/70 max-w-md">
-                Hand-picked tech with a bit of personality. The kind of thing you will not
-                find at JB Hi-Fi, priced between a decent lunch and a serious present.
+Hand-picked tech with a bit of personality — the kind your local electronics
+                chain does not stock. Priced between a decent lunch and a serious present.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={260}>

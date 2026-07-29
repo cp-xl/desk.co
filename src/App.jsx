@@ -11,7 +11,6 @@ import Home from '@/pages/Home';
 import ProductDetail from '@/pages/ProductDetail';
 import Shop from '@/pages/Shop';
 import Tech from '@/pages/Tech';
-import NewFinds from '@/pages/NewFinds';
 import Gifts from '@/pages/Gifts';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
@@ -51,7 +50,6 @@ const AuthenticatedApp = () => {
         <Route path="/product/:slug" element={<ProductDetail />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/tech" element={<Tech />} />
-        <Route path="/new-finds" element={<NewFinds />} />
         <Route path="/gifts" element={<Gifts />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

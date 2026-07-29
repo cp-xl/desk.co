@@ -23,7 +23,7 @@ export const FAQ = [
 
 export const HOW_IT_WORKS = [
   { title: 'We buy it first', body: 'Nothing gets listed off a spec sheet. It gets used on a desk or in a bag.' },
-  { title: 'A drop, not a firehose', body: 'New finds land in small batches. Easier to read, easier to gift.' },
+  { title: 'A drop, not a firehose', body: 'Stock lands in small batches. Easier to read, easier to gift.' },
   { title: 'Plain descriptions', body: 'What it does, what it costs, who it suits. You decide.' },
 ];
 
