@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '@/lib/CartContext';
+
+const LINKS = [
+  { label: 'Shop', to: '/shop' },
+  { label: 'Tech', to: '/tech' },
+  { label: 'New finds', to: '/new-finds' },
+  { label: 'Gifts', to: '/gifts' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+];
 
 export default function Navbar() {
   const { count, openCart } = useCart();
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const links = [
-    { label: 'Shop', to: '/collection' },
-    { label: 'Gifting', to: '/collection?filter=thinker' },
-    { label: 'About', to: '/#about' },
-  ];
 
   return (
     <header className="sticky top-0 z-40 bg-cream/90 backdrop-blur-md border-b border-charcoal/10">
@@ -27,11 +29,11 @@ export default function Navbar() {
           </button>
 
           <Link to="/" className="font-display text-2xl sm:text-3xl tracking-label text-charcoal leading-none">
-            DESK<span className="text-maroon">.</span>CO
+            DESCKO<span className="text-maroon">.</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-10">
-            {links.map((l) => (
+          <nav className="hidden lg:flex items-center gap-8">
+            {LINKS.map((l) => (
               <Link
                 key={l.label}
                 to={l.to}
@@ -42,24 +44,21 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={openCart}
-              className="relative p-2 -mr-2 text-charcoal hover:text-maroon transition-colors"
-              aria-label="Open cart"
-            >
-              <ShoppingBag className="h-5 w-5" />
-              {count > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-amber text-charcoal text-[10px] font-semibold flex items-center justify-center">
-                  {count}
-                </span>
-              )}
-            </button>
-          </div>
+          <button
+            onClick={openCart}
+            className="relative p-2 -mr-2 text-charcoal hover:text-maroon transition-colors"
+            aria-label="Open cart"
+          >
+            <ShoppingBag className="h-5 w-5" />
+            {count > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-amber text-charcoal text-[10px] font-semibold flex items-center justify-center">
+                {count}
+              </span>
+            )}
+          </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-charcoal/40 animate-fade-in" onClick={() => setOpen(false)} />
@@ -70,8 +69,8 @@ export default function Navbar() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <nav className="flex flex-col p-5 gap-1">
-              {links.map((l) => (
+            <nav className="flex flex-col p-5">
+              {LINKS.map((l) => (
                 <Link
                   key={l.label}
                   to={l.to}

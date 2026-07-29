@@ -9,7 +9,13 @@ import ScrollToTop from './components/ScrollToTop';
 import Layout from '@/components/deskco/Layout';
 import Home from '@/pages/Home';
 import ProductDetail from '@/pages/ProductDetail';
-import Collection from '@/pages/Collection';
+import Shop from '@/pages/Shop';
+import Tech from '@/pages/Tech';
+import NewFinds from '@/pages/NewFinds';
+import Gifts from '@/pages/Gifts';
+import About from '@/pages/About';
+import Contact from '@/pages/Contact';
+import CartPage from '@/pages/CartPage';
 import { Shipping, Returns, Privacy, Terms } from '@/pages/InfoPages';
 // Add page imports here
 
@@ -42,8 +48,14 @@ const AuthenticatedApp = () => {
       {/* Add your page Route elements here */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/collection" element={<Collection />} />
+        <Route path="/product/:slug" element={<ProductDetail />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/tech" element={<Tech />} />
+        <Route path="/new-finds" element={<NewFinds />} />
+        <Route path="/gifts" element={<Gifts />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/returns" element={<Returns />} />
         <Route path="/privacy" element={<Privacy />} />
