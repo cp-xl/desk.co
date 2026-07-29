@@ -6,6 +6,11 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
+import Layout from '@/components/deskco/Layout';
+import Home from '@/pages/Home';
+import ProductDetail from '@/pages/ProductDetail';
+import Collection from '@/pages/Collection';
+import { Shipping, Returns, Privacy, Terms } from '@/pages/InfoPages';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -35,7 +40,16 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       {/* Add your page Route elements here */}
-      <Route path="*" element={<PageNotFound />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/collection" element={<Collection />} />
+        <Route path="/shipping" element={<Shipping />} />
+        <Route path="/returns" element={<Returns />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
     </Routes>
   );
 };

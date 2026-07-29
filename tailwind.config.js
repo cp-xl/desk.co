@@ -7,7 +7,8 @@ module.exports = {
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			sm: 'calc(var(--radius) - 4px)',
+  			none: '0px'
   		},
   		colors: {
   			background: 'hsl(var(--background))',
@@ -43,6 +44,10 @@ module.exports = {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
+  			charcoal: '#1C1C1E',
+  			maroon: '#6B1A2A',
+  			amber: '#C4932A',
+  			cream: '#F2EDE3',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -62,32 +67,37 @@ module.exports = {
   			}
   		},
   		fontFamily: {
-  			heading: ['var(--font-heading)'],
-  			body: ['var(--font-body)'],
-  			display: ['var(--font-display)'],
+  			heading: ['Bebas Neue', 'Impact', 'sans-serif'],
+  			body: ['Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			display: ['Bebas Neue', 'Impact', 'sans-serif'],
   			mono: ['var(--font-mono)']
   		},
   		keyframes: {
   			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
+  				from: { height: '0' },
+  				to: { height: 'var(--radix-accordion-content-height)' }
   			},
   			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
+  				from: { height: 'var(--radix-accordion-content-height)' },
+  				to: { height: '0' }
+  			},
+  			'drawer-in': {
+  				from: { transform: 'translateX(100%)' },
+  				to: { transform: 'translateX(0)' }
+  			},
+  			'fade-in': {
+  				from: { opacity: '0' },
+  				to: { opacity: '1' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'drawer-in': 'drawer-in 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67)',
+  			'fade-in': 'fade-in 0.3s ease-out'
+  		},
+  		maxWidth: {
+  			'focus': '1140px'
   		}
   	}
   },
