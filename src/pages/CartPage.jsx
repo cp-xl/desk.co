@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Plus, Minus, ArrowRight } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import { useCart } from '@/lib/CartContext';
+import CheckoutButton from '@/components/deskco/CheckoutButton';
 
 const FREE_SHIPPING = 80;
 
@@ -85,12 +86,9 @@ export default function CartPage() {
                 <p className="mt-3 text-[12px] text-charcoal/60">
                   {remaining > 0 ? `$${remaining.toFixed(0)} from free shipping.` : 'Free shipping applied.'}
                 </p>
-                <a
-                  href="https://www.descko.com/cart-page"
-                  className="mt-6 flex items-center justify-center gap-2 w-full bg-amber text-charcoal py-4 text-[12px] tracking-label font-semibold hover:bg-[#d4a23a] transition-colors"
-                >
-                  Checkout <ArrowRight className="h-4 w-4" />
-                </a>
+                <div className="mt-6">
+                  <CheckoutButton items={items} />
+                </div>
                 <p className="mt-3 text-center text-[11px] tracking-label text-charcoal/40">
                   Payment handled by our Wix store
                 </p>

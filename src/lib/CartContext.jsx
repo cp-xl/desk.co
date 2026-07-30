@@ -24,6 +24,7 @@ function reducer(state, action) {
             name: product.name,
             price: product.price,
             image: product.image,
+            optionName: product.optionName || '',
             variant,
             quantity,
           },
