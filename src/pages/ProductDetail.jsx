@@ -174,7 +174,7 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-3">
+            <div className="mt-8">
               <button
                 disabled={!product.inStock}
                 onClick={() => addItem(product, variant, quantity)}
@@ -182,16 +182,6 @@ export default function ProductDetail() {
               >
                 {product.inStock ? 'Add to cart' : 'Not in stock yet'}
               </button>
-              {product.wixUrl && (
-                <a
-                  href={product.wixUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block w-full border-2 border-charcoal text-charcoal text-center py-4 text-[12px] tracking-label hover:bg-charcoal hover:text-cream transition-colors"
-                >
-                  View on descko.com →
-                </a>
-              )}
             </div>
 
             <p className="mt-4 text-[11px] tracking-label text-charcoal/40 text-center">
