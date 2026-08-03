@@ -2,7 +2,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.40';
 
 const WIX_STORES_APP_ID = '215238eb-22a5-4c36-9e7b-e7c08025e04e';
 const SITE_URL = 'https://checkout.descko.com';
-const CHECKOUT_PATH = '/cart-page';
+const CHECKOUT_PATH = '/checkout';
 const MAX_LINE_ITEMS = 30;
 const MAX_QUANTITY = 20;
 
