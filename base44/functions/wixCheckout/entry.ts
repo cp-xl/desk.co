@@ -1,7 +1,8 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.40';
 
 const WIX_STORES_APP_ID = '215238eb-22a5-4c36-9e7b-e7c08025e04e';
-const SITE_URL = 'https://descko.com.au';
+const SITE_URL = 'https://checkout.descko.com';
+const CHECKOUT_PATH = '/cart-page';
 const MAX_LINE_ITEMS = 30;
 const MAX_QUANTITY = 20;
 
@@ -62,7 +63,7 @@ export default async function (req: Request): Promise<Response> {
 
     // Wix site checkout page, loaded with the checkout we just created.
     const appSectionParams = encodeURIComponent(JSON.stringify({ checkoutId }));
-    const url = `${SITE_URL}/checkout?appSectionParams=${appSectionParams}`;
+    const url = `${SITE_URL}${CHECKOUT_PATH}?appSectionParams=${appSectionParams}`;
 
     return Response.json({ url, checkoutId });
   } catch (error) {
