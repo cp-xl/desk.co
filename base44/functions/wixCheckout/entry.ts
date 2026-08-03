@@ -61,9 +61,27 @@ export default async function (req: Request): Promise<Response> {
     const checkoutId = checkoutRes.checkout?.id;
     if (!checkoutId) throw new Error('Wix did not return a checkout id');
 
-    // Wix site checkout page, loaded with the checkout we just created.
-    const appSectionParams = encodeURIComponent(JSON.stringify({ checkoutId }));
-    const url = `${SITE_URL}${CHECKOUT_PATH}?appSectionParams=${appSectionParams}`;
+    // Preferred: Wix redirect session — hands the checkout to the visitor's own
+    // session on the Wix site, so the cart always loads.
+    let url = '';
+    const redirectResp = await fetch('https://www.wixapis.com/_api/redirects-api/v1/redirect-session', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ecomCheckout: { checkoutId },
+        callbacks: { postFlowUrl: SITE_URL, cartPageUrl: `${SITE_URL}/cart` },
+      }),
+    });
+    if (redirectResp.ok) {
+      const redirectJson = await redirectResp.json();
+      url = redirectJson.redirectSession?.fullUrl || '';
+    }
+
+    if (!url) {
+      // Fallback: load the Wix checkout page directly with the checkout id.
+      const appSectionParams = encodeURIComponent(JSON.stringify({ checkoutId }));
+      url = `${SITE_URL}${CHECKOUT_PATH}?checkoutId=${checkoutId}&appSectionParams=${appSectionParams}`;
+    }
 
     return Response.json({ url, checkoutId });
   } catch (error) {
