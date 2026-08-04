@@ -35,9 +35,17 @@ export function mapWixProduct(p) {
     ?.filter((i) => i?.image?.url)
     ?.map((i) => i.image.url) || (mainImageUrl ? [mainImageUrl] : []);
 
-  const firstOption = (p.flattenOptions || [])[0];
-  const variantList = firstOption?.choices?.length
-    ? firstOption.choices.map((c) => ({ id: c.id, label: c.value, value: c.value }))
+  const firstOption = (p.options || [])[0] || (p.flattenOptions || [])[0];
+  const optionChoices =
+    firstOption?.choicesSettings?.choices?.filter((c) => c.visible !== false) ||
+    firstOption?.choices ||
+    [];
+  const variantList = optionChoices.length
+    ? optionChoices.map((c) => ({
+        id: c.choiceId || c.id,
+        label: c.name || c.value,
+        value: c.name || c.value,
+      }))
     : [{ id: 'default', label: 'Default', value: 'Default' }];
 
   const wixCategory = p.directCategoriesInfo?.categories?.[0]?.name || null;
