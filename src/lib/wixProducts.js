@@ -45,6 +45,7 @@ export function mapWixProduct(p) {
         id: c.choiceId || c.id,
         label: c.name || c.value,
         value: c.name || c.value,
+        image: (c.linkedMedia || []).find((m) => m?.image?.url)?.image?.url || null,
       }))
     : [{ id: 'default', label: 'Default', value: 'Default' }];
 
