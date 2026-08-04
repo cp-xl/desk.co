@@ -59,16 +59,6 @@ export default function ProductDetail() {
 
   const gallery = product.gallery.length ? product.gallery : [product.image].filter(Boolean);
 
-  // Selecting an option shows its own image: the one linked to that choice in
-  // Wix, otherwise the gallery shot in the same position as the choice.
-  const selectVariant = (v) => {
-    setVariant(v.value);
-    const index = v.image
-      ? gallery.indexOf(v.image)
-      : product.variants.findIndex((x) => x.value === v.value);
-    if (index >= 0 && index < gallery.length) setActiveImage(index);
-  };
-
   return (
     <div className="bg-cream">
       <div className="mx-auto max-w-focus px-4 sm:px-6 pt-6">
@@ -148,7 +138,7 @@ export default function ProductDetail() {
                   {product.variants.map((v) => (
                     <button
                       key={v.id}
-                      onClick={() => selectVariant(v)}
+                      onClick={() => setVariant(v.value)}
                       className={`px-5 py-3 text-[12px] tracking-label border-2 transition-colors ${
                         variant === v.value
                           ? 'border-charcoal bg-charcoal text-cream'
