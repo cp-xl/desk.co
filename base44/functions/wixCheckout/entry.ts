@@ -20,6 +20,24 @@ async function wixPost(accessToken, url, body) {
   return JSON.parse(text || '{}');
 }
 
+// Wix eCom only accepts a variant id for products that have options — passing
+// option names silently drops the line item, emptying the checkout.
+async function resolveVariantId(accessToken, productId, choiceName) {
+  const resp = await fetch(
+    `https://www.wixapis.com/stores/v3/products/${encodeURIComponent(productId)}?fields=VARIANT_OPTION_CHOICE_NAMES`,
+    { headers: { Authorization: `Bearer ${accessToken}` } },
+  );
+  if (!resp.ok) return null;
+  const data = await resp.json();
+  const variants = data.product?.variantsInfo?.variants || [];
+  if (variants.length === 0) return null;
+  if (!choiceName || choiceName === 'Default') return variants.length === 1 ? variants[0].id : null;
+  const match = variants.find((v) =>
+    (v.choices || []).some((c) => c.optionChoiceNames?.choiceName === choiceName),
+  );
+  return match?.id || null;
+}
+
 export default async function (req: Request): Promise<Response> {
   try {
     const base44 = createClientFromRequest(req);
@@ -44,10 +62,10 @@ export default async function (req: Request): Promise<Response> {
       }
 
       const catalogReference = { catalogItemId: productId, appId: WIX_STORES_APP_ID };
-      const optionName = typeof item.optionName === 'string' ? item.optionName.slice(0, 80) : '';
       const variant = typeof item.variant === 'string' ? item.variant.slice(0, 80) : '';
-      if (optionName && variant && variant !== 'Default') {
-        catalogReference.options = { options: { [optionName]: variant } };
+      const variantId = await resolveVariantId(accessToken, productId, variant);
+      if (variantId) {
+        catalogReference.options = { variantId };
       }
 
       lineItems.push({ catalogReference, quantity });
