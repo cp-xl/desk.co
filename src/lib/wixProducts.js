@@ -1,23 +1,14 @@
 // Maps Wix Catalog V3 product shapes to the Descko design-layer format.
 import { base44 } from '@/api/base44Client';
 
-const CATEGORY_RULES = [
-  ['Keyboards', ['keycap', 'keyboard', 'mouse', 'switch tester']],
-  ['Audio', ['speaker', 'earbud', 'headphone', 'mic', 'microphone', 'audio', 'soundbar', 'turntable', 'cd player', 'cassette', 'radio']],
-  ['Printers', ['printer', 'label maker', 'thermal']],
-  ['Charging', ['charger', 'charging', 'power bank', 'powerbank', 'battery', 'solar']],
-  ['Mounts & Stands', ['mount', 'stand', 'holder', 'arm', 'tripod', 'dock', 'rig']],
-  ['Clocks', ['clock', 'alarm', 'timer']],
-];
+// Categories come from Wix only. "All Products" is the catch-all Wix collection,
+// so it is not a real type and never becomes a filter.
+const IGNORED_CATEGORIES = ['All Products'];
 
-function deriveCategory(name, description, wixCategory) {
-  if (wixCategory) return wixCategory;
-  // Name only: descriptions mention unrelated words and mis-sort the product.
-  const hay = (name || '').toLowerCase();
-  for (const [category, words] of CATEGORY_RULES) {
-    if (words.some((w) => hay.includes(w))) return category;
-  }
-  return 'Odd Ones';
+function deriveCategory(p) {
+  const names = (p.categoryNames || []).filter((n) => !IGNORED_CATEGORIES.includes(n));
+  const main = IGNORED_CATEGORIES.includes(p.mainCategoryName) ? null : p.mainCategoryName;
+  return main || names[0] || null;
 }
 
 function stripTags(html) {
@@ -50,8 +41,6 @@ export function mapWixProduct(p) {
       }))
     : [{ id: 'default', label: 'Default', value: 'Default' }];
 
-  const wixCategory = p.directCategoriesInfo?.categories?.[0]?.name || null;
-
   return {
     id: p.id,
     slug: p.slug,
@@ -60,7 +49,7 @@ export function mapWixProduct(p) {
     maxPrice,
     priceDisplay: !maxPrice || price === maxPrice ? `$${price}` : `from $${price}`,
     optionName: firstOption?.name || null,
-    category: deriveCategory(p.name, blurb, wixCategory),
+    category: deriveCategory(p),
     badge: p.ribbon || null,
     brand: p.brand || null,
     inStock,

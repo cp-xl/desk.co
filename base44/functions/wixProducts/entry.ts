@@ -9,6 +9,30 @@ const FIELDS = [
   "URL",
 ];
 
+// Wix returns only category ids on products, so names come from the categories API.
+async function fetchCategoryNames(accessToken: string) {
+  const resp = await fetch("https://www.wixapis.com/categories/v1/categories/query", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ query: { paging: { limit: 100 } }, treeReference: { appNamespace: "@wix/stores" } }),
+  });
+  if (!resp.ok) return {};
+  const data = await resp.json();
+  const map: Record<string, string> = {};
+  for (const c of data.categories || []) map[c.id] = c.name;
+  return map;
+}
+
+function withCategoryNames(products: any[], names: Record<string, string>) {
+  return products.map((p) => ({
+    ...p,
+    categoryNames: (p.directCategoriesInfo?.categories || [])
+      .map((c: any) => names[c.id])
+      .filter(Boolean),
+    mainCategoryName: names[p.mainCategoryId] || null,
+  }));
+}
+
 async function queryProducts(accessToken: string, filter: Record<string, unknown>, limit: number) {
   const resp = await fetch("https://www.wixapis.com/stores/v3/products/query", {
     method: "POST",
@@ -51,11 +75,13 @@ export default async function (req: Request): Promise<Response> {
         ? { id: { $eq: productId }, visible: { $eq: true } }
         : { slug: { $eq: slug }, visible: { $eq: true } };
       const products = await queryProducts(accessToken, filter, 1);
-      return Response.json({ product: products[0] || null });
+      const names = await fetchCategoryNames(accessToken);
+      return Response.json({ product: withCategoryNames(products, names)[0] || null });
     }
 
     const products = await queryProducts(accessToken, { visible: { $eq: true } }, 100);
-    return Response.json({ products });
+    const names = await fetchCategoryNames(accessToken);
+    return Response.json({ products: withCategoryNames(products, names) });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }

@@ -118,7 +118,9 @@ export default function ProductDetail() {
           </div>
 
           <div className="lg:col-span-5">
-            <p className="text-[11px] tracking-label text-maroon mb-3">{product.category}</p>
+            {product.category && (
+              <p className="text-[11px] tracking-label text-maroon mb-3">{product.category}</p>
+            )}
             <h1 className="font-body text-[34px] sm:text-[42px] leading-tight text-charcoal">{product.name}</h1>
             <p className="mt-3 font-ui text-xl text-charcoal tabular-nums">{product.priceDisplay}</p>
             <p className="mt-2 text-[12px] tracking-label text-charcoal/50">

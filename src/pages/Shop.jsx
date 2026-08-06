@@ -3,7 +3,7 @@ import ProductCard from '@/components/deskco/ProductCard';
 import FilterChips from '@/components/deskco/FilterChips';
 import Reveal from '@/components/deskco/Reveal';
 import { fetchProducts } from '@/lib/wixProducts';
-import { CATEGORIES, BUDGET_BANDS } from '@/lib/collections';
+import { BUDGET_BANDS } from '@/lib/collections';
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -22,10 +22,9 @@ export default function Shop() {
     return products.filter((p) => (!type || p.category === type) && (!band || band.match(p)));
   }, [products, type, budget]);
 
-  // Only offer filters that would actually return something.
+  // Types are the Wix categories the products actually belong to.
   const typeOptions = useMemo(
-    () =>
-      CATEGORIES.filter((c) => products.some((p) => p.category === c)).map((c) => ({ id: c, label: c })),
+    () => [...new Set(products.map((p) => p.category).filter(Boolean))].sort().map((c) => ({ id: c, label: c })),
     [products],
   );
 

@@ -25,7 +25,9 @@ export default function ProductCard({ product }) {
       </div>
 
       <div className="pt-3">
-        <p className="text-[10px] tracking-label text-maroon">{product.category}</p>
+        {product.category && (
+          <p className="text-[10px] tracking-label text-maroon">{product.category}</p>
+        )}
         <div className="mt-1 flex items-baseline justify-between gap-3">
           <p className="text-[14px] leading-snug text-charcoal group-hover:text-maroon transition-colors">
             {product.name}
