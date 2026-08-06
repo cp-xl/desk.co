@@ -37,12 +37,12 @@ export const COLLECTIONS = [
   },
 ];
 
-export const CATEGORIES = ['Audio', 'Wearables', 'Gaming', 'Rigs & Mounts', 'Storage', 'Power', 'Odd Ones'];
+export const CATEGORIES = ['Clocks', 'Keyboards', 'Audio', 'Printers', 'Charging', 'Mounts & Stands', 'Odd Ones'];
 
 export const BUDGET_BANDS = [
   { id: 'under-50', label: 'Under $50', match: (p) => p.price < 50 },
-  { id: 'under-100', label: 'Under $100', match: (p) => p.price < 100 },
-  { id: 'under-200', label: 'Under $200', match: (p) => p.price < 200 },
+  { id: '50-100', label: '$50 to $100', match: (p) => p.price >= 50 && p.price < 100 },
+  { id: 'over-100', label: '$100 and up', match: (p) => p.price >= 100 },
 ];
 
 export function pickForCollection(products, collection, limit = 4) {

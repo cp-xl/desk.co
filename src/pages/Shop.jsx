@@ -22,7 +22,17 @@ export default function Shop() {
     return products.filter((p) => (!type || p.category === type) && (!band || band.match(p)));
   }, [products, type, budget]);
 
-  const typeOptions = CATEGORIES.map((c) => ({ id: c, label: c }));
+  // Only offer filters that would actually return something.
+  const typeOptions = useMemo(
+    () =>
+      CATEGORIES.filter((c) => products.some((p) => p.category === c)).map((c) => ({ id: c, label: c })),
+    [products],
+  );
+
+  const budgetOptions = useMemo(
+    () => BUDGET_BANDS.filter((b) => products.some(b.match)),
+    [products],
+  );
 
   return (
     <div className="bg-cream">
@@ -40,7 +50,7 @@ export default function Shop() {
 
         <div className="mt-10 space-y-4">
           <FilterChips label="Type" options={typeOptions} active={type} onSelect={setType} />
-          <FilterChips label="Budget" options={BUDGET_BANDS} active={budget} onSelect={setBudget} />
+          <FilterChips label="Budget" options={budgetOptions} active={budget} onSelect={setBudget} />
         </div>
 
         <p className="mt-6 text-[11px] tracking-label text-charcoal/40">

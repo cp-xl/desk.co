@@ -2,17 +2,18 @@
 import { base44 } from '@/api/base44Client';
 
 const CATEGORY_RULES = [
-  ['Audio', ['speaker', 'earbud', 'headphone', 'mic', 'microphone', 'audio', 'soundbar', 'turntable']],
-  ['Wearables', ['watch', 'ring', 'band', 'tracker', 'wearable', 'smartwatch']],
-  ['Gaming', ['console', 'handheld', 'controller', 'gaming', 'keycap', 'keyboard', 'mouse']],
-  ['Power', ['power bank', 'powerbank', 'solar', 'charger', 'charging', 'battery', 'station']],
-  ['Rigs & Mounts', ['mount', 'stand', 'arm', 'tripod', 'dock', 'holder', 'rig']],
-  ['Storage', ['ssd', 'drive', 'storage', 'card reader', 'hub', 'memory']],
+  ['Keyboards', ['keycap', 'keyboard', 'mouse', 'switch tester']],
+  ['Audio', ['speaker', 'earbud', 'headphone', 'mic', 'microphone', 'audio', 'soundbar', 'turntable', 'cd player', 'cassette', 'radio']],
+  ['Printers', ['printer', 'label maker', 'thermal']],
+  ['Charging', ['charger', 'charging', 'power bank', 'powerbank', 'battery', 'solar']],
+  ['Mounts & Stands', ['mount', 'stand', 'holder', 'arm', 'tripod', 'dock', 'rig']],
+  ['Clocks', ['clock', 'alarm', 'timer']],
 ];
 
 function deriveCategory(name, description, wixCategory) {
   if (wixCategory) return wixCategory;
-  const hay = `${name || ''} ${description || ''}`.toLowerCase();
+  // Name only: descriptions mention unrelated words and mis-sort the product.
+  const hay = (name || '').toLowerCase();
   for (const [category, words] of CATEGORY_RULES) {
     if (words.some((w) => hay.includes(w))) return category;
   }
