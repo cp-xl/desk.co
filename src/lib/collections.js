@@ -17,27 +17,25 @@ export const COLLECTIONS = [
   {
     id: 'desk-people',
     name: 'For desk people',
-    line: 'Mounts, stands and things that hold other things.',
+    line: 'Keys, clocks and things that earn their spot on the desk.',
     band: '$30 – $150',
-    match: (p) => ['Rigs & Mounts', 'Storage'].includes(p.category),
+    match: (p) => ['Keyboards', 'Clocks'].includes(p.category),
   },
   {
     id: 'always-outside',
-    name: 'For the one always outside',
-    line: 'Power, solar, and gear that survives a weekend.',
+    name: 'For the one always on the move',
+    line: 'Gear that lives in a bag and still works on day three.',
     band: '$40 – $400',
-    match: (p) => p.category === 'Power',
+    match: (p) => p.category === 'Travel Items',
   },
   {
     id: 'sound',
     name: 'For people with opinions about sound',
-    line: 'Speakers, earbuds, mics. They will comment on it.',
+    line: 'Speakers they will have thoughts about.',
     band: '$30 – $600',
-    match: (p) => p.category === 'Audio',
+    match: (p) => p.category === 'Bluetooth Speakers',
   },
 ];
-
-export const CATEGORIES = ['Clocks', 'Keyboards', 'Audio', 'Printers', 'Charging', 'Mounts & Stands', 'Odd Ones'];
 
 export const BUDGET_BANDS = [
   { id: 'under-50', label: 'Under $50', match: (p) => p.price < 50 },

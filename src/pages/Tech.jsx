@@ -3,8 +3,6 @@ import ProductCard from '@/components/deskco/ProductCard';
 import Reveal from '@/components/deskco/Reveal';
 import { fetchProducts } from '@/lib/wixProducts';
 
-const GENERAL = ['Audio', 'Wearables', 'Gaming', 'Rigs & Mounts', 'Storage', 'Odd Ones'];
-
 function Group({ title, items }) {
   if (items.length === 0) return null;
   return (
@@ -31,7 +29,8 @@ export default function Tech() {
       .finally(() => setLoading(false));
   }, []);
 
-  const power = products.filter((p) => p.category === 'Power');
+  // Groups are the Wix categories the products actually belong to.
+  const groups = [...new Set(products.map((p) => p.category).filter(Boolean))].sort();
 
   return (
     <div className="bg-cream">
@@ -43,7 +42,7 @@ export default function Tech() {
           <h1 className="font-display text-[44px] sm:text-[60px] leading-none text-charcoal">Tech</h1>
         </Reveal>
         <p className="mt-4 text-[15px] text-charcoal/70 max-w-lg">
-          The gear, grouped. Power and solar sit on their own at the bottom.
+          The gear, grouped by what the thing actually is.
         </p>
       </div>
 
@@ -55,14 +54,9 @@ export default function Tech() {
         </div>
       ) : (
         <>
-          {GENERAL.map((c) => (
+          {groups.map((c) => (
             <Group key={c} title={c} items={products.filter((p) => p.category === c)} />
           ))}
-          {power.length > 0 && (
-            <div className="bg-charcoal/[0.04]">
-              <Group title="Power & solar" items={power} />
-            </div>
-          )}
         </>
       )}
     </div>

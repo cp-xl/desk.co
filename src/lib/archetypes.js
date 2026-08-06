@@ -10,7 +10,7 @@ export const ARCHETYPES = [
       'Give them hardware with parts: mounts, docks, rigs, anything with a spare screw in the box.',
       'Avoid anything sealed shut. If it cannot be adjusted, it will not hold their attention.',
     ],
-    match: (p) => ['Rigs & Mounts', 'Storage'].includes(p.category),
+    match: (p) => ['Keyboards', 'Clocks'].includes(p.category),
   },
   {
     id: 'nomad',
@@ -22,7 +22,7 @@ export const ARCHETYPES = [
       'Power banks, solar, small speakers, earbuds. Gear rated for being thrown in a bag.',
       'Avoid anything fragile, mains-only, or the size of a hardback book.',
     ],
-    match: (p) => ['Power', 'Audio'].includes(p.category),
+    match: (p) => ['Travel Items', 'Bluetooth Speakers'].includes(p.category),
   },
   {
     id: 'audiophile',
@@ -34,7 +34,7 @@ export const ARCHETYPES = [
       'Sound gear, mics, anything where the spec sheet is part of the gift.',
       'Avoid generic. They will identify the compromise within ten minutes.',
     ],
-    match: (p) => p.category === 'Audio',
+    match: (p) => p.category === 'Bluetooth Speakers',
   },
   {
     id: 'minimalist',
@@ -46,7 +46,7 @@ export const ARCHETYPES = [
       'One object, one job, done properly. Small footprint, no accessories to store.',
       'Avoid sets, bundles and anything that needs its own box.',
     ],
-    match: (p) => ['Wearables', 'Odd Ones'].includes(p.category),
+    match: (p) => p.category === 'Clocks',
   },
   {
     id: 'player',
@@ -58,7 +58,7 @@ export const ARCHETYPES = [
       'Screen time is not a concern here. Feel and latency are.',
       'Avoid anything that needs a subscription to be useful.',
     ],
-    match: (p) => ['Gaming', 'Wearables'].includes(p.category),
+    match: (p) => p.category === 'Keyboards',
   },
 ];
 
