@@ -9,7 +9,7 @@ export default function MobileMenu({ links, onClose }) {
   return createPortal(
     <div className="fixed inset-0 z-[60] lg:hidden">
       <div className="absolute inset-0 bg-charcoal/50 animate-fade-in" onClick={onClose} />
-      <div className="absolute left-0 top-0 h-full w-72 max-w-[80%] bg-cream shadow-2xl flex flex-col animate-drawer-in">
+      <div className="absolute left-0 right-0 top-0 bg-cream shadow-2xl flex flex-col animate-sheet-down">
         <div className="flex items-center justify-between px-5 h-16 border-b border-charcoal/10">
           <span className="font-display text-xl tracking-label">MENU</span>
           <button onClick={onClose} aria-label="Close menu" className="p-2 -mr-2">

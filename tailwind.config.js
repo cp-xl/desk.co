@@ -86,6 +86,10 @@ module.exports = {
   				from: { transform: 'translateX(100%)' },
   				to: { transform: 'translateX(0)' }
   			},
+  			'sheet-down': {
+  				from: { transform: 'translateY(-100%)' },
+  				to: { transform: 'translateY(0)' }
+  			},
   			'fade-in': {
   				from: { opacity: '0' },
   				to: { opacity: '1' }
@@ -99,6 +103,7 @@ module.exports = {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'drawer-in': 'drawer-in 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67)',
+  			'sheet-down': 'sheet-down 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67)',
   			'fade-in': 'fade-in 0.3s ease-out',
   			marquee: 'marquee 28s linear infinite'
   		},
