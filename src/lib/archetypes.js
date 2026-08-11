@@ -7,10 +7,10 @@ export const ARCHETYPES = [
     verdict: 'like something to mount, wire and rearrange for a whole weekend',
     guide: [
       'They already own a drawer of cables and a label maker they bought for one job.',
-      'Give them hardware with parts: mounts, docks, rigs, anything with a spare screw in the box.',
+      'Give them hardware with parts: monitor stands, mini docks, keycaps, label printers.',
       'Avoid anything sealed shut. If it cannot be adjusted, it will not hold their attention.',
     ],
-    match: (p) => ['Keyboards', 'Clocks'].includes(p.category),
+    match: (p) => ['Misc', 'Keyboards'].includes(p.category),
   },
   {
     id: 'nomad',
@@ -19,10 +19,10 @@ export const ARCHETYPES = [
     verdict: 'like something that lives in a backpack and still works on day three',
     guide: [
       'They charge things in airports and cafés and lose exactly one cable per trip.',
-      'Power banks, solar, small speakers, earbuds. Gear rated for being thrown in a bag.',
+      'Chargers, headphones, phone holders, cleaning kits. Gear rated for being thrown in a bag.',
       'Avoid anything fragile, mains-only, or the size of a hardback book.',
     ],
-    match: (p) => ['Travel Items', 'Bluetooth Speakers'].includes(p.category),
+    match: (p) => p.category === 'Travel Items',
   },
   {
     id: 'audiophile',
@@ -31,7 +31,7 @@ export const ARCHETYPES = [
     verdict: 'have thoughts about this. Good ones, for once',
     guide: [
       'They have told you, unprompted, why your earbuds are wrong.',
-      'Sound gear, mics, anything where the spec sheet is part of the gift.',
+      'Speakers, CD players, anything where the spec sheet is part of the gift.',
       'Avoid generic. They will identify the compromise within ten minutes.',
     ],
     match: (p) => p.category === 'Bluetooth Speakers',
@@ -46,7 +46,7 @@ export const ARCHETYPES = [
       'One object, one job, done properly. Small footprint, no accessories to store.',
       'Avoid sets, bundles and anything that needs its own box.',
     ],
-    match: (p) => p.category === 'Clocks',
+    match: (p) => ['Clocks', 'Misc'].includes(p.category),
   },
   {
     id: 'player',
@@ -54,7 +54,7 @@ export const ARCHETYPES = [
     line: 'Reaction time is a personality trait.',
     verdict: 'like something with buttons, and use it the same night',
     guide: [
-      'Handhelds, controllers, keys. Gear that gets picked up daily, not displayed.',
+      'Keyboards, keycaps, anything with a switch under the finger. Picked up daily, not displayed.',
       'Screen time is not a concern here. Feel and latency are.',
       'Avoid anything that needs a subscription to be useful.',
     ],
@@ -104,9 +104,9 @@ export const QUESTIONS = [
     id: 'budget',
     prompt: 'What are you spending?',
     options: [
-      { label: 'Under $50', budget: (p) => p.price > 0 && p.price < 50 },
-      { label: '$50 – $150', budget: (p) => p.price >= 50 && p.price <= 150 },
-      { label: '$150 – $300', budget: (p) => p.price > 150 && p.price <= 300 },
+      { label: 'Under $30', budget: (p) => p.price > 0 && p.price < 30 },
+      { label: '$30 – $75', budget: (p) => p.price >= 30 && p.price <= 75 },
+      { label: '$75 – $200', budget: (p) => p.price > 75 && p.price <= 200 },
       { label: 'No ceiling, it is a big one', budget: () => true },
     ],
   },
