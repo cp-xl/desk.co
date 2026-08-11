@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '@/lib/CartContext';
+import MobileMenu from '@/components/deskco/MobileMenu';
 
 const LINKS = [
   { label: 'Shop', to: '/shop' },
@@ -58,31 +59,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {open && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-charcoal/40 animate-fade-in" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 max-w-[80%] bg-cream shadow-2xl flex flex-col animate-drawer-in">
-            <div className="flex items-center justify-between px-5 h-16 border-b border-charcoal/10">
-              <span className="font-display text-xl tracking-label">MENU</span>
-              <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 -mr-2">
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <nav className="flex flex-col p-5">
-              {LINKS.map((l) => (
-                <Link
-                  key={l.label}
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  className="font-display text-3xl tracking-wide py-3 text-charcoal hover:text-maroon transition-colors border-b border-charcoal/10"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
+      {open && <MobileMenu links={LINKS} onClose={() => setOpen(false)} />}
     </header>
   );
 }
