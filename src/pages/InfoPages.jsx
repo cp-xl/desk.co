@@ -22,7 +22,7 @@ export function Shipping() {
       title="Shipping"
       body={[
         'Australian orders ship within 2–3 business days from Melbourne. Standard delivery is 3–5 business days nationwide.',
-        'Free shipping on orders over $80. Under that, a flat $9.90 applies.',
+        'Shipping is calculated at checkout based on your address.',
         'International shipping is calculated at checkout. We currently ship to New Zealand, the United States, and the United Kingdom.',
         'Each buddy is packed in protective recycled paperboard. No plastic, no excess.',
       ]}

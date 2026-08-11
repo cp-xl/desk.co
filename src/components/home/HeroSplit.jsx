@@ -49,7 +49,7 @@ export default function HeroSplit({ leadProduct }) {
             <Reveal variant="fade-up" delay={160}>
               <p className="mt-7 max-w-md text-[16px] leading-[1.65] text-charcoal/75">
                 A short list of tech you will not find at the local chain store. Speakers,
-                earbuds, handhelds, power. Mostly $30 to $80, which is the range where a
+                keyboards, clocks, desk gear. Mostly $25 to $80, which is the range where a
                 present still looks like a decision.
               </p>
             </Reveal>

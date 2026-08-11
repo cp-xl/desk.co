@@ -9,10 +9,6 @@ export default function CartDrawer() {
 
   if (!isOpen) return null;
 
-  const freeShipThreshold = 80;
-  const remaining = Math.max(0, freeShipThreshold - subtotal);
-  const progress = Math.min(100, (subtotal / freeShipThreshold) * 100);
-
   return (
     <div className="fixed inset-0 z-50">
       <div
@@ -27,20 +23,6 @@ export default function CartDrawer() {
             <X className="h-5 w-5" />
           </button>
         </div>
-
-        {/* shipping progress */}
-        {items.length > 0 && (
-          <div className="px-5 sm:px-6 py-4 border-b border-charcoal/10">
-            <p className="text-[11px] tracking-label text-charcoal/60">
-              {remaining > 0
-                ? `$${remaining.toFixed(0)} from free shipping`
-                : 'You have free shipping'}
-            </p>
-            <div className="mt-2 h-1 w-full bg-charcoal/10 overflow-hidden">
-              <div className="h-full bg-amber transition-all duration-500" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-        )}
 
         {/* items */}
         <div className="flex-1 overflow-y-auto">

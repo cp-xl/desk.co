@@ -5,7 +5,7 @@ export const FAQ = [
   },
   {
     q: 'How fast does it ship?',
-    a: 'Orders leave in 1–2 business days from Australia. Free over $80.',
+    a: 'Orders leave in 1–2 business days from Australia.',
   },
   {
     q: 'Can I return something?',
@@ -29,18 +29,17 @@ export const HOW_IT_WORKS = [
 
 export const TRUST = [
   'Ships from Australia',
-  'Free over $80',
   '30-day returns',
   'Gift notes, no prices',
 ];
 
 export const MARQUEE = [
   'Speakers',
-  'Earbuds',
-  'Smart rings',
-  'Handhelds',
-  'Mics',
-  'Mounts',
-  'Portable power',
-  'Solar',
+  'Keyboards',
+  'Keycaps',
+  'Clocks',
+  'Desk lamps',
+  'Monitor stands',
+  'Mini printers',
+  'Travel kits',
 ];

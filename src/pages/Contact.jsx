@@ -69,7 +69,7 @@ export default function Contact() {
 
           <h2 className="mt-10 text-[11px] tracking-label text-charcoal/40 mb-4">Fine print</h2>
           <p className="text-[13px] leading-relaxed text-charcoal/60">
-            Ships from Australia, 1–2 business days. Free over $80. Thirty-day returns on
+            Ships from Australia, 1–2 business days. Thirty-day returns on
             unopened or as-new gear. Gift notes on request, prices left off.
           </p>
         </aside>

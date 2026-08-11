@@ -5,11 +5,8 @@ import { Image } from '@/components/ui/image';
 import { useCart } from '@/lib/CartContext';
 import CheckoutButton from '@/components/deskco/CheckoutButton';
 
-const FREE_SHIPPING = 80;
-
 export default function CartPage() {
   const { items, subtotal, removeItem, setQuantity } = useCart();
-  const remaining = Math.max(0, FREE_SHIPPING - subtotal);
 
   return (
     <div className="bg-cream">
@@ -83,9 +80,7 @@ export default function CartPage() {
                   <span className="text-[11px] tracking-label text-charcoal/50">Subtotal</span>
                   <span className="font-display text-3xl text-charcoal">${subtotal.toFixed(0)}</span>
                 </div>
-                <p className="mt-3 text-[12px] text-charcoal/60">
-                  {remaining > 0 ? `$${remaining.toFixed(0)} from free shipping.` : 'Free shipping applied.'}
-                </p>
+                <p className="mt-3 text-[12px] text-charcoal/60">Shipping calculated at checkout.</p>
                 <div className="mt-6">
                   <CheckoutButton items={items} />
                 </div>
