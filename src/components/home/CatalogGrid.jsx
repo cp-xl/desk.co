@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import Reveal from '@/components/deskco/Reveal';
 
-// Editorial catalogue tile: name and price sit over the image, index number below.
+// Editorial catalogue tile: name, price and index number sit below the image.
 function CatalogTile({ product, index, feature }) {
   return (
     <Link
@@ -17,19 +17,19 @@ function CatalogTile({ product, index, feature }) {
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           fittingType="fill"
         />
-        <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-3 sm:p-4">
-          <p className="font-display text-[15px] sm:text-[18px] leading-tight text-charcoal">
-            {product.name}
-          </p>
-          <p className="text-[12px] text-charcoal/70 tabular-nums shrink-0">{product.priceDisplay}</p>
-        </div>
         {!product.inStock && (
           <span className="absolute bottom-3 left-3 bg-charcoal/85 text-cream text-[10px] tracking-label px-2 py-1">
             Sold out
           </span>
         )}
       </div>
-      <p className="mt-2 text-[10px] tracking-label text-charcoal/35 text-right">
+      <div className="mt-3 flex items-start justify-between gap-3">
+        <p className="font-display text-[15px] sm:text-[18px] leading-tight text-charcoal group-hover:text-maroon transition-colors">
+          {product.name}
+        </p>
+        <p className="font-ui text-[12px] text-charcoal/70 tabular-nums shrink-0">{product.priceDisplay}</p>
+      </div>
+      <p className="mt-1.5 text-[10px] tracking-label text-charcoal/35">
         No. {String(index + 1).padStart(2, '0')}
       </p>
     </Link>
