@@ -7,8 +7,15 @@ generate a new image set for a product).
 Using the product's existing store images as reference, generate 8 new editorial images that match
 the DESK.CO aesthetic and show every colour variation available for purchase.
 
+## Hard constraints
+- Do NOT change the website code and do NOT change the Wix product.
+- Do NOT redesign the product: the shape, materials, proportions, branding and finish must stay
+  exactly as in the existing store photos. Always pass 1-2 existing store images as reference.
+
 ## Steps
-1. Fetch the product from Wix (`wixProducts` function or the Stores v3 API) to collect:
+1. Fetch the product from Wix. Working call: `POST https://www.wixapis.com/stores/v3/products/search`
+   with body `{"search":{"cursorPaging":{"limit":100}},"fields":["MEDIA_ITEMS_INFO","DESCRIPTION"]}`
+   using the `wix` connector token, then match the product by name. Collect:
    - existing media URLs (use as visual reference for shape, packaging, included items)
    - the colour options actually available for purchase (variant/option values)
    - included accessories from the description (cables, rolls, guides, etc.)
@@ -18,7 +25,10 @@ the DESK.CO aesthetic and show every colour variation available for purchase.
    - 3 x daily use cases (real desk / hand-held / in-situ moments, no faces required)
    - 2 x photo-led infographics (editorial product photography with typographic overlays, e.g.
      "How it works", "Colours", "Ways to use it")
-   - The colour range must be visible across the set (a colour line-up shot or infographic).
+   - The colour range available for purchase must be visible across the set (a colour line-up shot
+     or a "Colours" infographic). If the product has no colour options in Wix, keep the whole set in
+     its single finish and say so in the reply.
+   - Generate the 8 images in parallel batches to keep it fast.
 3. Present all 8 images in the chat. Do NOT change the website or the Wix product unless the user
    asks in a follow-up.
 
