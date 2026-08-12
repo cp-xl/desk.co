@@ -23,8 +23,6 @@ export function Shipping() {
       body={[
         'Orders arrive in 5 to 12 business days.',
         'Shipping is calculated at checkout based on your address.',
-        'International shipping is calculated at checkout. We currently ship to New Zealand, the United States, and the United Kingdom.',
-        'Each buddy is packed in protective recycled paperboard. No plastic, no excess.',
       ]}
     />
   );
