@@ -26,9 +26,12 @@ export default function ProductDetail() {
         setProduct(p);
         if (p?.variants?.length) setVariant(p.variants[0].value);
       })
-      .finally(() => setLoading(false));
-
-    fetchProducts().then((all) => setRelated(all.filter((p) => p.slug !== slug).slice(0, 4)));
+      .finally(() => {
+        setLoading(false);
+        // Related products load after the main product so they never compete
+        // with the hero image for bandwidth.
+        fetchProducts().then((all) => setRelated(all.filter((p) => p.slug !== slug).slice(0, 4)));
+      });
   }, [slug]);
 
   if (loading) {
@@ -91,6 +94,10 @@ export default function ProductDetail() {
                     alt={product.name}
                     className="h-full w-full object-cover"
                     fittingType="fill"
+                    quality={82}
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
                   />
                 )}
                 {product.badge && (
@@ -109,7 +116,7 @@ export default function ProductDetail() {
                         activeImage === i ? 'border-charcoal' : 'border-transparent'
                       }`}
                     >
-                      <Image src={g} alt={`${product.name} view ${i + 1}`} className="h-full w-full object-cover" fittingType="fill" />
+                      <Image src={g} alt={`${product.name} view ${i + 1}`} className="h-full w-full object-cover" fittingType="fill" quality={70} />
                     </button>
                   ))}
                 </div>
