@@ -5,9 +5,12 @@ export default function TrustBar() {
   return (
     <section className="border-y border-charcoal/10 bg-cream">
       <div className="mx-auto max-w-focus px-4 sm:px-6">
-        <ul className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-charcoal/10">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6">
           {TRUST.map((t) => (
-            <li key={t} className="py-5 px-4 text-center text-[11px] tracking-label text-charcoal/60">
+            <li
+              key={t}
+              className="flex items-center justify-center border border-charcoal/15 bg-charcoal/[0.03] px-6 py-8 text-center text-[13px] tracking-label text-charcoal/70"
+            >
               {t}
             </li>
           ))}
