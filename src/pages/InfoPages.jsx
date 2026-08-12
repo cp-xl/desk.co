@@ -16,18 +16,6 @@ export default function InfoPage({ title, body }) {
   );
 }
 
-export function Shipping() {
-  return (
-    <InfoPage
-      title="Shipping"
-      body={[
-        'Orders arrive in 5 to 12 business days.',
-        'Shipping is calculated at checkout based on your address.',
-      ]}
-    />
-  );
-}
-
 export function Privacy() {
   return (
     <InfoPage

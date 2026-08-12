@@ -15,7 +15,7 @@ import Gifts from '@/pages/Gifts';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import CartPage from '@/pages/CartPage';
-import { Shipping, Privacy, Terms } from '@/pages/InfoPages';
+import { Privacy, Terms } from '@/pages/InfoPages';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -55,7 +55,6 @@ const AuthenticatedApp = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart-page" element={<CartPage />} />
-        <Route path="/shipping" element={<Shipping />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<PageNotFound />} />

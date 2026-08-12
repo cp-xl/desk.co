@@ -28,8 +28,7 @@ export const HOW_IT_WORKS = [
 ];
 
 export const TRUST = [
-  'Ships from Australia',
-  '30-day returns',
+  'Orders arrive in 5 to 12 business days',
   'Gift notes, no prices',
 ];
 
