@@ -62,12 +62,27 @@ export function mapWixProduct(p) {
   };
 }
 
+// Session cache so navigating back to a catalogue page is instant.
+let productsCache = null;
+let productsPromise = null;
+
 // Full catalogue, newest first
 export async function fetchProducts() {
-  const res = await base44.functions.invoke('wixProducts', {});
-  return (res.data.products || [])
-    .map(mapWixProduct)
-    .sort((a, b) => String(b.createdDate).localeCompare(String(a.createdDate)));
+  if (productsCache) return productsCache;
+  if (!productsPromise) {
+    productsPromise = base44.functions
+      .invoke('wixProducts', {})
+      .then((res) => {
+        productsCache = (res.data.products || [])
+          .map(mapWixProduct)
+          .sort((a, b) => String(b.createdDate).localeCompare(String(a.createdDate)));
+        return productsCache;
+      })
+      .finally(() => {
+        productsPromise = null;
+      });
+  }
+  return productsPromise;
 }
 
 // Single product by slug
