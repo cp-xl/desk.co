@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ProductCard from '@/components/deskco/ProductCard';
 import FilterChips from '@/components/deskco/FilterChips';
 import Reveal from '@/components/deskco/Reveal';
@@ -10,6 +11,8 @@ export default function Shop() {
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState(null);
   const [budget, setBudget] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = (searchParams.get('q') || '').trim().toLowerCase();
 
   useEffect(() => {
     fetchProducts()
@@ -19,8 +22,15 @@ export default function Shop() {
 
   const filtered = useMemo(() => {
     const band = BUDGET_BANDS.find((b) => b.id === budget);
-    return products.filter((p) => (!type || p.category === type) && (!band || band.match(p)));
-  }, [products, type, budget]);
+    return products.filter(
+      (p) =>
+        (!type || p.category === type) &&
+        (!band || band.match(p)) &&
+        (!query ||
+          p.name.toLowerCase().includes(query) ||
+          (p.category || '').toLowerCase().includes(query)),
+    );
+  }, [products, type, budget, query]);
 
   // Types are the Wix categories the products actually belong to.
   const typeOptions = useMemo(
@@ -47,6 +57,18 @@ export default function Shop() {
           you actually want to spend.
         </p>
 
+        {query && (
+          <div className="mt-8 flex items-center gap-3">
+            <p className="text-[12px] tracking-label text-charcoal/60">Searching: {searchParams.get('q')}</p>
+            <button
+              onClick={() => setSearchParams({})}
+              className="text-[11px] tracking-label text-maroon underline-offset-4 hover:underline"
+            >
+              Clear
+            </button>
+          </div>
+        )}
+
         <div className="mt-10 space-y-4">
           <FilterChips label="Type" options={typeOptions} active={type} onSelect={setType} />
           <FilterChips label="Budget" options={budgetOptions} active={budget} onSelect={setBudget} />
@@ -70,6 +92,7 @@ export default function Shop() {
                 onClick={() => {
                   setType(null);
                   setBudget(null);
+                  setSearchParams({});
                 }}
                 className="mt-4 text-[12px] tracking-label text-maroon underline-offset-4 hover:underline"
               >

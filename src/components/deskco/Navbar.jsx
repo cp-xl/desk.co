@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '@/lib/CartContext';
 import MobileMenu from '@/components/deskco/MobileMenu';
+import SearchBox from '@/components/deskco/SearchBox';
 
 const LINKS = [
   { label: 'Shop', to: '/shop' },
@@ -44,6 +45,8 @@ export default function Navbar() {
             ))}
           </nav>
 
+          <div className="flex items-center gap-1">
+          <SearchBox />
           <button
             onClick={openCart}
             className="relative p-2 -mr-2 text-charcoal hover:text-maroon transition-colors"
@@ -56,6 +59,7 @@ export default function Navbar() {
               </span>
             )}
           </button>
+          </div>
         </div>
       </div>
 
