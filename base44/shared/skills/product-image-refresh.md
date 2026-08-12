@@ -4,8 +4,14 @@ Trigger: "Touch up the images for the {PRODUCT} to fit the website aesthetic" (o
 generate a new image set for a product).
 
 ## Goal
-Using the product's existing store images as reference, generate 8 new editorial images that match
-the DESK.CO aesthetic and show every colour variation available for purchase.
+Taking inspiration from the product's existing store images, generate 8 new editorial images that
+match the DESK.CO aesthetic and show every colour variation available for purchase.
+
+## Required set (exactly 8)
+- 1 x the product with all included items
+- 2 x the product at different angles
+- 3 x daily use cases
+- 2 x infographics
 
 ## Hard constraints
 - Do NOT change the website code and do NOT change the Wix product.
