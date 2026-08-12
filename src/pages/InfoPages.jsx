@@ -21,23 +21,10 @@ export function Shipping() {
     <InfoPage
       title="Shipping"
       body={[
-        'Australian orders ship within 2–3 business days from Melbourne. Standard delivery is 3–5 business days nationwide.',
+        'Orders arrive in 5 to 12 business days.',
         'Shipping is calculated at checkout based on your address.',
         'International shipping is calculated at checkout. We currently ship to New Zealand, the United States, and the United Kingdom.',
         'Each buddy is packed in protective recycled paperboard. No plastic, no excess.',
-      ]}
-    />
-  );
-}
-
-export function Returns() {
-  return (
-    <InfoPage
-      title="Returns"
-      body={[
-        '30 days from delivery. If a buddy is not what you expected, send it back for a full refund.',
-        'Items must be unused and in original packaging. Start a return by replying to your order confirmation email.',
-        'Refunds are processed within 5 business days of receiving the return. Return shipping is covered by us for faulty items.',
       ]}
     />
   );
