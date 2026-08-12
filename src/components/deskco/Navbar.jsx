@@ -4,6 +4,7 @@ import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '@/lib/CartContext';
 import MobileMenu from '@/components/deskco/MobileMenu';
 import SearchBox from '@/components/deskco/SearchBox';
+import Logo from '@/components/deskco/Logo';
 
 const LINKS = [
   { label: 'Shop', to: '/shop' },
@@ -29,8 +30,8 @@ export default function Navbar() {
             <Menu className="h-5 w-5" />
           </button>
 
-          <Link to="/" className="font-display text-2xl sm:text-3xl tracking-label text-charcoal leading-none">
-            DESCKO<span className="text-maroon">.</span>
+          <Link to="/" aria-label="DESCKO home" className="block">
+            <Logo className="h-6 sm:h-7 w-[130px] sm:w-[150px]" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
