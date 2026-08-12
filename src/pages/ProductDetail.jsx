@@ -202,9 +202,6 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            <p className="mt-4 text-[11px] tracking-label text-charcoal/40 text-center">
-              Ships in 1–2 days · 30-day returns
-            </p>
           </div>
         </div>
       </div>
