@@ -85,9 +85,23 @@ export async function fetchProducts() {
   return productsPromise;
 }
 
+// Session cache per slug, same pattern as the catalogue.
+const productCache = new Map();
+const productPromises = new Map();
+
 // Single product by slug
 export async function fetchProductBySlug(slug) {
-  const res = await base44.functions.invoke('wixProducts', { slug });
-  if (!res.data.product) return null;
-  return mapWixProduct(res.data.product);
+  if (productCache.has(slug)) return productCache.get(slug);
+  if (!productPromises.has(slug)) {
+    const p = base44.functions
+      .invoke('wixProducts', { slug })
+      .then((res) => {
+        const product = res.data.product ? mapWixProduct(res.data.product) : null;
+        productCache.set(slug, product);
+        return product;
+      })
+      .finally(() => productPromises.delete(slug));
+    productPromises.set(slug, p);
+  }
+  return productPromises.get(slug);
 }
