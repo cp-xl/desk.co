@@ -9,7 +9,7 @@ export default function TrustBar() {
           {TRUST.map((t) => (
             <li
               key={t}
-              className="flex items-center justify-center border border-charcoal/15 bg-charcoal/[0.03] px-6 py-8 text-center text-[13px] tracking-label text-charcoal/70"
+              className="flex items-center justify-center border border-charcoal/15 bg-charcoal/[0.03] px-6 py-[24px] text-center text-[13px] tracking-label text-charcoal/70"
             >
               {t}
             </li>
