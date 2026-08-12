@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Plus, Minus, Check } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import { fetchProductBySlug, fetchProducts } from '@/lib/wixProducts';
+import { getPreview } from '@/lib/imagePreview';
 import { useCart } from '@/lib/CartContext';
 import ProductCard from '@/components/deskco/ProductCard';
 import TrustBar from '@/components/deskco/TrustBar';
@@ -91,6 +92,7 @@ export default function ProductDetail() {
                 {gallery[activeImage] && (
                   <Image
                     src={gallery[activeImage]}
+                    previewSrc={getPreview(gallery[activeImage])}
                     alt={product.name}
                     className="h-full w-full object-cover"
                     fittingType="fill"

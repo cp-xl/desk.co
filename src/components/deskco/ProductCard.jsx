@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
+import { rememberPreview } from '@/lib/imagePreview';
 
 export default function ProductCard({ product }) {
   return (
@@ -11,6 +12,7 @@ export default function ProductCard({ product }) {
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           fittingType="fill"
+          onLoad={(e) => rememberPreview(product.image, e.currentTarget.currentSrc)}
         />
         {product.badge && (
           <span className="absolute top-3 left-3 bg-amber text-charcoal text-[10px] tracking-label px-2 py-1">
