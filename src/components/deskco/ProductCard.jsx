@@ -1,18 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
-import { rememberPreview } from '@/lib/imagePreview';
+import { prefetchHero } from '@/lib/heroImage';
 
 export default function ProductCard({ product }) {
   return (
-    <Link to={`/product/${product.slug}`} className="group block spring-lift">
+    <Link
+      to={`/product/${product.slug}`}
+      className="group block spring-lift"
+      onMouseEnter={() => prefetchHero(product.image)}
+      onTouchStart={() => prefetchHero(product.image)}
+    >
       <div className="relative overflow-hidden bg-charcoal/5 aspect-square">
         <Image
           src={product.image}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           fittingType="fill"
-          onLoad={(e) => rememberPreview(product.image, e.currentTarget.currentSrc)}
         />
         {product.badge && (
           <span className="absolute top-3 left-3 bg-amber text-charcoal text-[10px] tracking-label px-2 py-1">

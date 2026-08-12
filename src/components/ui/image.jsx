@@ -84,7 +84,7 @@ const ImageWrapper = React.forwardRef(({ aspectRatio, className, style, children
 ImageWrapper.displayName = "ImageWrapper"
 
 const ResponsiveImage = React.forwardRef(
-  ({ parsed, fittingType, focalPoint, quality, className, style, aspectRatio, onLoad, previewSrc, ...props }, parentRef) => {
+  ({ parsed, fittingType, focalPoint, quality, className, style, aspectRatio, onLoad, ...props }, parentRef) => {
     const wrapperRef = React.useRef(null)
     const imgRef = React.useRef(null)
     const size = useSize(wrapperRef)
@@ -122,16 +122,7 @@ const ResponsiveImage = React.forwardRef(
             image's load time. Same crop shape and focal anchor as the main
             image — fp_ is relative to the crop box, so a square or centered
             placeholder would blur-preview a different region. */}
-        {options && !loaded && previewSrc && (
-          <img
-            src={previewSrc}
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full inset-0 absolute"
-            style={{ objectFit: fittingType === "fit" ? "contain" : "cover" }}
-          />
-        )}
-        {options && !loaded && !previewSrc && (
+        {options && !loaded && (
           <img
             src={buildTransformUrl(parsed, {
               ...options,
@@ -191,7 +182,6 @@ const Image = React.forwardRef(
       focalPointX,
       focalPointY,
       quality = 90,
-      previewSrc,
       ...props
     },
     ref
@@ -242,7 +232,6 @@ const Image = React.forwardRef(
         fittingType={fittingType}
         focalPoint={focalPoint}
         quality={quality}
-        previewSrc={previewSrc}
         aspectRatio={aspectRatio}
         {...imageProps}
       />
