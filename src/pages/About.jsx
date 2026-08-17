@@ -23,18 +23,21 @@ export default function About() {
         </Reveal>
         <div className="mt-8 max-w-xl space-y-5 text-[16px] leading-[1.7] text-charcoal/75">
           <p>
-            Descko is for the person who has drawn a name out of a hat, has a birthday in
-            four days, or just likes good objects. You know the walk down the aisle at the
-            local electronics chain: two hundred boxes, all the same, none of them a gift.
+            You know the feeling. Your name gets pulled out of the office Secret Santa hat,
+            your best friend&rsquo;s birthday is in four days, or you just like collecting desk
+            buddies and don&rsquo;t need much of an excuse. Either way, you end up two hundred
+            boxes deep at the big electronics chain, and none of them read as a gift.
           </p>
           <p>
             So we keep a short list instead. Speakers, keyboards, keycaps, clocks, desk lamps,
-            monitor stands, mini printers, travel kits. Roughly $5 to $200, most of it between
-            $25 and $80. That is the range where a present still reads as a decision rather than an errand.
+            monitor stands, mini printers, travel kits. Mostly $25 to $80. That&rsquo;s the range
+            where a present still feels like a decision, not something you grabbed on the way
+            home.
           </p>
           <p>
-            The people who buy here are not chasing specs. They want one good thing that
-            arrives on time, looks considered on a desk, and gets used past January.
+            Here&rsquo;s the thing about gifting: nobody wants to overthink it, and nobody wants to
+            be forgettable either. You want to hand over something good, watch their face do
+            the thing, and not have to think about it again after that.
           </p>
           <p>Short list, clear prices, no aisle to walk.</p>
         </div>

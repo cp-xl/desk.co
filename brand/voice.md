@@ -38,14 +38,19 @@ This is deliberate rhythm, not sloppiness:
 
 > Short list, clear prices, no aisle to walk.
 
-**No contractions.** Write "do not", "will not", "cannot", "is not". Verified across the
-codebase: 18 expanded forms, zero apostrophe contractions. It is what gives the copy its flat,
-unhurried quality — contractions would make it chattier and less certain.
+**Contractions are fine.** The voice is plain, not stiff. Most of the page copy happens to use
+expanded forms ("do not", "will not"), which suits its flatter passages, but "That's the range"
+and "you won't get at your local tech store" are both on the site and both sound right. Use
+whichever the sentence wants. This was briefly written up as a ban on contractions, which was
+wrong — an accident of how the copy was drafted, mistaken for a decision.
 
-**No em dashes.** There are none in any user-facing string. Use a full stop, or restructure.
-En dashes are used only for numeric ranges: `1–2 business days`, `$30 – $75`.
+**Prefer a full stop to a dash.** The copy leans on short sentences rather than clauses hung
+off dashes, and reads better for it. Not a prohibition: `index.html` uses an em dash and is
+fine. En dashes for numeric ranges: `1–2 business days`, `$30 – $75`.
 
-**No exclamation marks.** None appear in visible copy. The voice does not raise itself.
+**No exclamation marks.** None appear in visible copy, and none should. The voice does not
+raise itself — this one is a real rule, because an exclamation mark is hype punctuation and
+hype is the thing the brand refuses.
 
 **Second person, sparing first person.** Address the reader as "you". "We" appears only when
 the shop is genuinely the actor — "We choose", "we will sort it".
