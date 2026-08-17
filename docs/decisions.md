@@ -208,3 +208,55 @@ pointer is still *inside* the list.
 
 **Would change if:** the list gains a pointer interaction that genuinely needs a selection
 model, in which case track hover separately and keep it out of `aria-activedescendant`.
+
+---
+
+## The brand ships three logo files, not six
+
+**Decided:** `public/brand/` carries `descko-wordmark-charcoal`, `descko-wordmark-cream` and
+`descko-lockup-charcoal-bg`, plus the `descko-og` social card. Single-colour mono variants
+and a cream-field lockup were generated on 2026-08-17 and removed the same day.
+
+**Why:** each remaining file covers a surface the others cannot — a light background, a dark
+background, and a background you do not control. The removed three covered nothing new. Mono
+also discards the full stop, which is the only element that makes the wordmark a mark rather
+than the company name typed out.
+
+The wider point: they were generated before the mark itself was settled, which was premature.
+Asset variants should follow a decision about which surfaces the brand actually publishes to,
+not precede it.
+
+**Would change if:** a real one-colour process comes up — engraving, embroidery, single-ink
+print. Add the variant to the generator's `variants` array then, not in advance.
+
+---
+
+## `brand/` holds identity, `public/brand/` holds artwork
+
+**Decided:** the brand system lives in `brand/` at the repo root. `public/brand/` contains
+only generated exports, and its README is a pointer.
+
+**Why:** the exports need a public URL, since `index.html` references the Open Graph card at
+`/brand/descko-og.png`. The identity does not, and putting prose in a served directory both
+publishes it and invites hand-editing of generated files. Splitting them gives one source of
+truth for each, and `tools/brand/build-brand-assets.mjs` remains the only definition of the
+mark.
+
+---
+
+## The voice guide is derived from live copy
+
+**Decided:** every rule in `brand/voice.md` comes from copy already on the site, and the
+mechanical rules were verified against the codebase rather than asserted.
+
+**Why:** a voice guide written from imagination describes a brand that does not exist, and
+the first person to compare it against the site finds it wrong. Deriving it means the guide
+and the product already agree.
+
+Verified on 2026-08-17: 18 expanded negations and zero apostrophe contractions; zero em
+dashes in user-facing strings (all 26 in the repo are in code comments); no exclamation marks
+in visible copy. The governing rule is the brand's own, from the About page — *"No hype
+voice. We describe the thing. You decide if you want it."*
+
+**Would change if:** the copy on the site changes direction. Update the guide from the copy,
+not the other way round.

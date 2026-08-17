@@ -21,6 +21,31 @@ Full entry: [`changelog/2026-08-17-review-fixes.md`](changelog/2026-08-17-review
 
 ---
 
+## 2026-08-17 — Brand asset set trimmed, brand identity folder added
+
+Full entry: [`changelog/2026-08-17-brand-identity-folder.md`](changelog/2026-08-17-brand-identity-folder.md)
+
+### Added
+- `brand/` — the identity itself: `logo.md`, `colour.md`, `typography.md`, `voice.md`, and an
+  index. `AGENTS.md` now points agents there before any visual change or user-facing copy.
+- Every rule in `brand/voice.md` is derived from live site copy, with the mechanical ones
+  (no contractions, no em dashes, no exclamation marks) verified against the codebase.
+
+### Changed
+- `public/brand/` cut from 27 files to 15. The mono wordmarks and the cream-field lockup were
+  removed: mono discards the full stop, which is the mark, and the cream lockup duplicated a
+  surface the charcoal wordmark already covers. The remaining three cover light, dark, and
+  uncontrolled backgrounds, with no overlap.
+- `public/brand/README.md` reduced to a pointer at `brand/`, so there is one source of truth.
+
+### Raised, not actioned
+- The wordmark's full stop renders in three different colours — vermilion in the navbar,
+  amber in the footer, vermilion in the exported cream wordmark the footer should match.
+- Maroon and vermilion are close enough in hue to read as one colour badly reproduced, and
+  they share the header.
+
+---
+
 ## 2026-08-17 — Logotype redesign
 
 Full entry: [`changelog/2026-08-17-logotype-redesign.md`](changelog/2026-08-17-logotype-redesign.md)
