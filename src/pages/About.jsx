@@ -4,8 +4,8 @@ import Reveal from '@/components/deskco/Reveal';
 
 const VALUES = [
   { title: 'A tight list', body: 'Under a hundred products, ever. If something better arrives, something leaves.' },
-  { title: 'Not in the aisle', body: 'Things the big chain stores do not carry, at prices that still make sense as a gift.' },
-  { title: 'Readable in one sitting', body: 'The whole catalogue fits in a coffee break. No endless scroll, no filters you need.' },
+  { title: 'Not in the aisle', body: 'Things the big retailers do not stock, at prices that still make sense as a gift.' },
+  { title: 'Readable in one sitting', body: 'The whole catalogue takes five minutes. No endless scroll, no filters you need.' },
   { title: 'No hype voice', body: 'We describe the thing. You decide if you want it.' },
 ];
 
@@ -23,15 +23,15 @@ export default function About() {
         </Reveal>
         <div className="mt-8 max-w-xl space-y-5 text-[16px] leading-[1.7] text-charcoal/75">
           <p>
-            You know the feeling. Your name gets pulled out of the office Secret Santa hat,
-            your best friend’s birthday is in two weeks, or you just like collecting cool
-            tech gadgets for funsies. Either way, you end up two hundred boxes deep at the
-            big electronics chain, and none of them read as a gift.
+            You know the feeling. Your name comes out of the Secret Santa hat, your best
+            friend’s birthday is in two weeks, or you just like buying yourself things for
+            the desk. Either way, you end up scrolling four hundred near-identical listings,
+            and none of them read as a gift.
           </p>
           <p>
             So we keep a short list instead. Sound, desk gear, and small things that do one
             job properly. Mostly $25 to $80. That’s the range where a present still feels like
-            a decision, not something you grabbed on the way home.
+            a decision.
           </p>
           <p>
             Here’s the thing about gifting: nobody wants to overthink it, and nobody wants to
