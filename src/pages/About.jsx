@@ -24,7 +24,7 @@ export default function About() {
         <div className="mt-8 max-w-xl space-y-5 text-[16px] leading-[1.7] text-charcoal/75">
           <p>
             You know the feeling. Your name gets pulled out of the office Secret Santa hat,
-            your best friend’s birthday is in four days, or you just like collecting desk
+            your best friend’s birthday is in two weeks, or you just like collecting desk
             buddies and don’t need much of an excuse. Either way, you end up two hundred
             boxes deep at the big electronics chain, and none of them read as a gift.
           </p>
