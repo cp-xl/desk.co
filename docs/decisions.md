@@ -92,11 +92,28 @@ correct and wanted. Stripping the family would restyle all of them. `.tracking-d
 the same uppercase and letter-spacing without the family, for the handful of places that
 combine it with `.font-display`.
 
-**Note:** both utilities setting `font-family` is the underlying trap — whichever is declared
-later in `index.css` wins, regardless of the order the classes appear in JSX. `.wordmark` also
-sets `font-family`; it is declared after `.font-display` and `.tracking-label` and is meant to
-be used *alone*, never combined with either. Do not add a fourth utility that sets
-`font-family`.
+**The trap:** several utilities in `src/index.css` set `font-family`, and when two land on the
+same element the one declared **later in the stylesheet** wins — regardless of the order the
+classes appear in JSX. That is what made the original bug invisible: `font-display
+tracking-label` reads as though `font-display` should win.
+
+Utilities that set a family:
+
+| Utility | Family |
+| --- | --- |
+| `.font-display` | Bebas Neue |
+| `.tracking-label` | Archivo |
+| `.wordmark` | Archivo |
+| `.font-ui` | Archivo |
+| `.copy` | Space Grotesk |
+
+**The rule:** never put two of these on the same element. Adding another family-setting
+utility is fine on its own — the problem is only ever combination. When an element needs its
+family from one utility and its tracking from another, the tracking utility must not set a
+family; that is exactly what `.tracking-display` is for.
+
+Current usage is consistent with this: `.wordmark` appears alone on the navbar and footer
+logos, and `.tracking-display` is the only tracking utility paired with `.font-display`.
 
 ---
 
