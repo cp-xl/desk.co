@@ -18,7 +18,7 @@ export default function CartDrawer() {
       <aside className="absolute right-0 top-0 h-full w-full sm:w-[42%] max-w-md bg-cream flex flex-col animate-drawer-in">
         {/* header */}
         <div className="flex items-center justify-between px-5 sm:px-6 h-16 border-b border-charcoal/10">
-          <span className="font-display text-xl tracking-label text-charcoal">YOUR CART</span>
+          <span className="font-display text-xl tracking-display text-charcoal">YOUR CART</span>
           <button onClick={closeCart} aria-label="Close cart" className="p-2 -mr-2 text-charcoal hover:text-maroon transition-colors">
             <X className="h-5 w-5" />
           </button>

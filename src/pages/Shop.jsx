@@ -5,6 +5,7 @@ import FilterChips from '@/components/deskco/FilterChips';
 import Reveal from '@/components/deskco/Reveal';
 import { fetchProducts } from '@/lib/wixProducts';
 import { BUDGET_BANDS } from '@/lib/collections';
+import { searchProducts } from '@/lib/search';
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ export default function Shop() {
   const [type, setType] = useState(null);
   const [budget, setBudget] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = (searchParams.get('q') || '').trim().toLowerCase();
+  const query = (searchParams.get('q') || '').trim();
 
   useEffect(() => {
     fetchProducts()
@@ -20,16 +21,11 @@ export default function Shop() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Search first so the ranking survives, then narrow with the chips.
   const filtered = useMemo(() => {
     const band = BUDGET_BANDS.find((b) => b.id === budget);
-    return products.filter(
-      (p) =>
-        (!type || p.category === type) &&
-        (!band || band.match(p)) &&
-        (!query ||
-          p.name.toLowerCase().includes(query) ||
-          (p.category || '').toLowerCase().includes(query)),
-    );
+    const base = query ? searchProducts(products, query) : products;
+    return base.filter((p) => (!type || p.category === type) && (!band || band.match(p)));
   }, [products, type, budget, query]);
 
   // Types are the Wix categories the products actually belong to.
