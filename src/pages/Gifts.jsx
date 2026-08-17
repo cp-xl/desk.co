@@ -29,7 +29,7 @@ export default function Gifts() {
           </h1>
         </Reveal>
         <p className="mt-4 text-[15px] text-charcoal/70 max-w-lg">
-          Sorted by the person, not the category. Gift notes go on the packing slip, prices do not.
+          Sorted by the person, not the category.
         </p>
         <a
           href="#quiz"
