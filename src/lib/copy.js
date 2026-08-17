@@ -1,19 +1,23 @@
 export const FAQ = [
   {
-    q: 'Where does this stuff come from?',
-    a: 'Specialist brands and small makers you will not see on a chain store shelf. Everything ships with a warranty.',
-  },
-  {
-    q: 'How fast does it ship?',
-    a: 'Orders leave in 1–2 business days from Australia.',
+    q: 'How long will my order take?',
+    a: 'Five to twelve business days to arrive. If you are buying for a date, give it the full twelve.',
   },
   {
     q: 'Can I return something?',
     a: 'Thirty days, unopened or as-new. Email us and we will sort it without a form maze.',
   },
   {
+    q: 'What if it turns up damaged or faulty?',
+    a: 'Email hello@descko.com with a photo and your order number. Faulty is our problem, not yours, and Australian Consumer Law rights apply on top of the thirty days.',
+  },
+  {
     q: 'Do you do gift notes?',
-    a: 'Yes. Add a note at checkout and we will write it on the packing slip. No prices on it.',
+    a: 'Not at the moment. We would rather say no than promise a handwritten note and miss it on the day.',
+  },
+  {
+    q: 'Can I change or cancel an order?',
+    a: 'Email us as soon as you can. Before it ships we can usually change or cancel it. After that it becomes a return.',
   },
   {
     q: 'Why is the list so short?',
@@ -29,7 +33,7 @@ export const HOW_IT_WORKS = [
 
 export const TRUST = [
   'Orders arrive in 5 to 12 business days',
-  'Gift notes, no prices',
+  'Thirty-day returns, unopened or as-new',
 ];
 
 export const MARQUEE = [

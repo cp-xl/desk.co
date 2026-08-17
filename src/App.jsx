@@ -14,6 +14,7 @@ import Tech from '@/pages/Tech';
 import Gifts from '@/pages/Gifts';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import Faq from '@/pages/Faq';
 import CartPage from '@/pages/CartPage';
 import { Privacy, Terms } from '@/pages/InfoPages';
 // Add page imports here
@@ -53,6 +54,7 @@ const AuthenticatedApp = () => {
         <Route path="/gifts" element={<Gifts />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart-page" element={<CartPage />} />
         <Route path="/privacy" element={<Privacy />} />
