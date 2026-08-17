@@ -112,25 +112,105 @@ export const QUESTIONS = [
   },
 ];
 
-// Highest-scoring archetype; ties break toward the earlier archetype in the list.
-export function scoreArchetype(answers) {
+export const BUDGET_QUESTION_ID = 'budget';
+
+export function getArchetype(id) {
+  return ARCHETYPES.find((a) => a.id === id) || null;
+}
+
+export function budgetFilterFor(index) {
+  const question = QUESTIONS.find((q) => q.id === BUDGET_QUESTION_ID);
+  return question?.options[index]?.budget || null;
+}
+
+export function budgetLabelFor(index) {
+  const question = QUESTIONS.find((q) => q.id === BUDGET_QUESTION_ID);
+  return question?.options[index]?.label || null;
+}
+
+/**
+ * Every archetype ranked, with the share of the answered points each one took.
+ * The quiz shows the runner-up too: most people are a blend, and naming the
+ * second read is what makes the verdict sound like it was about them.
+ */
+export function rankArchetypes(answers) {
   const totals = {};
+  let awarded = 0;
   QUESTIONS.forEach((q) => {
     const option = q.options[answers[q.id]];
     if (!option?.scores) return;
     Object.entries(option.scores).forEach(([id, n]) => {
       totals[id] = (totals[id] || 0) + n;
+      awarded += n;
     });
   });
-  const ranked = ARCHETYPES.filter((a) => totals[a.id]).sort((a, b) => totals[b.id] - totals[a.id]);
-  return ranked[0] || ARCHETYPES[0];
+
+  return ARCHETYPES.map((archetype) => ({
+    archetype,
+    score: totals[archetype.id] || 0,
+    share: awarded ? Math.round(((totals[archetype.id] || 0) / awarded) * 100) : 0,
+  })).sort((a, b) => b.score - a.score);
 }
 
-// Products for an archetype, inside budget where possible.
+// Ties break toward the earlier archetype in the list, as before.
+export function scoreArchetype(answers) {
+  return rankArchetypes(answers)[0]?.archetype || ARCHETYPES[0];
+}
+
+// Why a given product suits a given archetype. Keyed on category so the line is
+// specific, with a fallback that still says something true about the product.
+const REASONS = {
+  tinkerer: {
+    Keyboards: 'Switches, keycaps and a layout to argue with. Weeks of fiddling in it.',
+    Misc: 'Parts to mount and adjust, which is the half of the gift they enjoy most.',
+    default: 'Something to set up properly rather than just switch on.',
+  },
+  nomad: {
+    'Travel Items': 'Built for a bag. Survives the trip and the one after it.',
+    'Bluetooth Speakers': 'Small enough to pack, loud enough to bother with.',
+    default: 'Packs down small and still works on day three.',
+  },
+  audiophile: {
+    'Bluetooth Speakers': 'A spec sheet they will actually read, and then tell you about.',
+    default: 'The kind of object they will have an opinion on within ten minutes.',
+  },
+  minimalist: {
+    Clocks: 'One object, one job. Earns its square of desk and nothing more.',
+    Misc: 'Small footprint, no accessories to store, nothing to rehome.',
+    default: 'Does one thing properly and stays out on the desk.',
+  },
+  player: {
+    Keyboards: 'Something with a switch under the finger. Used the same night.',
+    default: 'Picked up daily rather than displayed.',
+  },
+};
+
+function reasonFor(archetype, product) {
+  const set = REASONS[archetype.id] || {};
+  return set[product.category] || set.default || 'On the list because it holds up.';
+}
+
+/**
+ * A shortlist for one archetype, each pick carrying the reason it is there.
+ * On-archetype and in-budget items come first; the list then widens rather than
+ * coming back empty, and anything outside the stated budget is marked so the
+ * shopper is never surprised by the price.
+ */
 export function recommend(products, archetype, budgetFilter, limit = 3) {
   const inBudget = budgetFilter ? products.filter(budgetFilter) : products;
   const onArchetype = inBudget.filter(archetype.match);
-  // Top up with other in-budget items (then anything) so a narrow budget still shows options.
-  const topUp = [...inBudget, ...products].filter((p) => !onArchetype.includes(p));
-  return [...onArchetype, ...topUp].slice(0, limit);
+  const otherInBudget = inBudget.filter((p) => !onArchetype.includes(p));
+  // Off-budget but on-archetype beats off-archetype filler: the person matters
+  // more than the ceiling, as long as the stretch is labelled.
+  const stretch = products.filter((p) => archetype.match(p) && !inBudget.includes(p));
+  const rest = products.filter(
+    (p) => !onArchetype.includes(p) && !otherInBudget.includes(p) && !stretch.includes(p),
+  );
+
+  return [...onArchetype, ...otherInBudget, ...stretch, ...rest].slice(0, limit).map((product) => ({
+    product,
+    reason: reasonFor(archetype, product),
+    onArchetype: archetype.match(product),
+    overBudget: Boolean(budgetFilter) && !budgetFilter(product),
+  }));
 }

@@ -7,7 +7,7 @@ export default function Marquee() {
     <div className="overflow-hidden bg-charcoal py-4">
       <div className="flex whitespace-nowrap animate-marquee">
         {row.map((word, i) => (
-          <span key={i} className="mx-6 font-display text-2xl tracking-label text-cream/80">
+          <span key={i} className="mx-6 font-display text-2xl tracking-display text-cream/80">
             {word}
             <span className="ml-6 text-amber">/</span>
           </span>

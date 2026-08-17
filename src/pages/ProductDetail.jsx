@@ -95,6 +95,10 @@ export default function ProductDetail() {
                     alt={product.name}
                     className="h-full w-full object-cover"
                     loading="eager"
+                    // Lowercase on purpose: React 18 has no fetchPriority prop,
+                    // so the camelCase form is dropped with a warning while an
+                    // unknown lowercase attribute is passed through to the DOM.
+                    // eslint-disable-next-line react/no-unknown-property
                     fetchpriority="high"
                     decoding="async"
                   />
@@ -106,16 +110,20 @@ export default function ProductDetail() {
                 )}
               </div>
               {gallery.length > 1 && (
-                <div className="mt-4 flex gap-3">
+                // Scrolls rather than wraps: a long gallery would otherwise push
+                // the page sideways on a phone.
+                <div className="mt-4 flex gap-3 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x">
                   {gallery.map((g, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveImage(i)}
-                      className={`relative h-20 w-20 overflow-hidden bg-charcoal/5 border-2 transition-colors ${
-                        activeImage === i ? 'border-charcoal' : 'border-transparent'
+                      aria-label={`Show image ${i + 1} of ${gallery.length}`}
+                      aria-current={activeImage === i}
+                      className={`relative h-20 w-20 shrink-0 snap-start overflow-hidden bg-charcoal/5 border-2 transition-colors ${
+                        activeImage === i ? 'border-charcoal' : 'border-transparent hover:border-charcoal/30'
                       }`}
                     >
-                      <Image src={g} alt={`${product.name} view ${i + 1}`} className="h-full w-full object-cover" fittingType="fill" quality={70} />
+                      <Image src={g} alt="" className="h-full w-full object-cover" fittingType="fill" quality={70} />
                     </button>
                   ))}
                 </div>

@@ -46,6 +46,7 @@ module.exports = {
   			ring: 'hsl(var(--ring))',
   			charcoal: '#1C1C1E',
   			maroon: '#6B1A2A',
+  			vermilion: '#B3382C',
   			amber: '#C4932A',
   			cream: '#F2EDE3',
   			chart: {

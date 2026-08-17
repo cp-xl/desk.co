@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-focus px-4 sm:px-6 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-5">
-            <div className="font-display text-4xl tracking-label">
+            <div className="wordmark text-2xl sm:text-3xl">
               DESCKO<span className="text-amber">.</span>
             </div>
             <p className="mt-4 text-cream/60 text-sm leading-relaxed max-w-xs">

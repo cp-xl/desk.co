@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu } from 'lucide-react';
 import { useCart } from '@/lib/CartContext';
 import MobileMenu from '@/components/deskco/MobileMenu';
 import SearchBox from '@/components/deskco/SearchBox';
@@ -29,8 +29,8 @@ export default function Navbar() {
             <Menu className="h-5 w-5" />
           </button>
 
-          <Link to="/" className="font-display text-2xl sm:text-3xl tracking-label text-charcoal leading-none">
-            DESCKO<span className="text-maroon">.</span>
+          <Link to="/" className="wordmark text-xl sm:text-2xl text-charcoal leading-none">
+            DESCKO<span className="text-vermilion">.</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">

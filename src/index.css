@@ -31,6 +31,8 @@
     --maroon: #6B1A2A;
     --amber: #C4932A;
     --cream: #F2EDE3;
+    /* The full stop in the wordmark, and only that. Maroon is still the UI red. */
+    --vermilion: #B3382C;
 
     --font-heading: 'Bebas Neue',Impact,sans-serif;
     --font-body: 'Space Grotesk',Roboto,ui-sans-serif,system-ui,sans-serif;
@@ -72,6 +74,40 @@
     background-color: var(--cream);
     color: var(--charcoal);
   }
+
+  /* Keyboard users get a visible ring; pointer users see nothing change.
+     Maroon reads on the cream page, so the charcoal bands switch to amber. */
+  :focus-visible {
+    outline: 2px solid var(--maroon);
+    outline-offset: 2px;
+  }
+
+  .bg-charcoal :focus-visible,
+  .text-cream :focus-visible {
+    outline-color: var(--amber);
+  }
+}
+
+@layer components {
+  /* Jump link for keyboard and screen reader users: off-screen until focused. */
+  .skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -4rem;
+    z-index: 100;
+    background-color: var(--charcoal);
+    color: var(--cream);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0.75rem;
+  }
 }
 
 @layer utilities {
@@ -83,6 +119,22 @@
     font-family: var(--font-ui);
     font-weight: 500;
     letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  /* Same treatment as .tracking-label but without the family, so it can sit on
+     .font-display without overriding it — both utilities set font-family, and
+     whichever is declared later wins regardless of the class order in JSX. */
+  .tracking-display {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  /* The logotype. Matches public/brand/descko-wordmark-* — Archivo Medium at
+     0.22em — so the rendered header and the exported files are the same mark.
+     Headings stay on Bebas via .font-display; this is not a heading. */
+  .wordmark {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
   }
   .font-ui {

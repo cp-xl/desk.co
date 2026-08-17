@@ -17,10 +17,29 @@ If your agent supports Agent Skills, install or update Base44 skills before Base
 npx skills add base44/skills
 ```
 
+## Project Documentation
+
+`docs/` is the source of truth for project history. Read it before making changes.
+
+- `docs/README.md`: index, conventions, and a brief map of how the project fits together.
+- `docs/CHANGELOG.md`: every change set, newest first. Start here.
+- `docs/changelog/`: one detailed entry per change set (`YYYY-MM-DD-short-slug.md`).
+- `docs/decisions.md`: standing decisions and what was ruled out. **Check before reversing
+  anything** — several choices in this codebase look arbitrary until you know the reasoning.
+- `docs/product-image-briefs.md`: per-product source facts for generating product imagery.
+- `public/brand/README.md`: logo usage rules and how to regenerate the brand assets.
+
+After completing a change set, add an entry to `docs/CHANGELOG.md` and a matching file in
+`docs/changelog/`, and record any new standing decision in `docs/decisions.md`.
+
 ## Key Files
 
 - `src/`: frontend application source.
 - `src/api/base44Client.js`: frontend Base44 SDK client.
+- `src/lib/`: shared logic — `wixProducts.js` (Wix to design-layer mapping), `search.js`,
+  `archetypes.js` (gift quiz and guides), `collections.js`.
+- `base44/functions/`: backend functions; all Wix catalogue and checkout traffic goes through here.
+- `tools/brand/`: brand asset generator; not wired into `package.json` by design.
 - `vite.config.js`: Vite config and Base44 Vite plugin setup.
 - `.env.local`: local-only environment values; never commit secrets.
 
