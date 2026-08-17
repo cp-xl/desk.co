@@ -27,7 +27,18 @@ npx skills add base44/skills
 - `docs/decisions.md`: standing decisions and what was ruled out. **Check before reversing
   anything** — several choices in this codebase look arbitrary until you know the reasoning.
 - `docs/product-image-briefs.md`: per-product source facts for generating product imagery.
-- `public/brand/README.md`: logo usage rules and how to regenerate the brand assets.
+
+`brand/` is the source of truth for brand identity. Consult it before changing anything
+visual or writing any user-facing copy.
+
+- `brand/README.md`: index and the short version of what Descko is.
+- `brand/logo.md`: the wordmark, its three files, clear space, minimum size, misuse.
+- `brand/colour.md`: the palette and what each colour is allowed to do.
+- `brand/typography.md`: the three faces, and the `font-family` rule that keeps them apart.
+- `brand/voice.md`: how Descko writes. **Read this before writing any copy** — no hype, no
+  contractions, no em dashes, no exclamation marks.
+
+Exported artwork lives in `public/brand/` and is **generated** — never edit it by hand.
 
 After completing a change set, add an entry to `docs/CHANGELOG.md` and a matching file in
 `docs/changelog/`, and record any new standing decision in `docs/decisions.md`.

@@ -172,13 +172,15 @@ function png(source, width) {
     .asPng();
 }
 
+// Deliberately three, plus the Open Graph card below. Each one covers a surface
+// the others cannot: light backgrounds, dark backgrounds, and backgrounds you do
+// not control. Single-colour "mono" variants and a cream-field lockup were cut —
+// they duplicated surfaces already covered, and mono discards the stop, which is
+// the whole idea of the mark. See brand/logo.md.
 const variants = [
   { name: 'descko-wordmark-charcoal', opts: { letterColor: CHARCOAL, dotColor: VERMILION } },
   { name: 'descko-wordmark-cream', opts: { letterColor: CREAM, dotColor: VERMILION } },
-  { name: 'descko-wordmark-mono-charcoal', opts: { letterColor: CHARCOAL, dotColor: CHARCOAL } },
-  { name: 'descko-wordmark-mono-cream', opts: { letterColor: CREAM, dotColor: CREAM } },
   { name: 'descko-lockup-charcoal-bg', opts: { letterColor: CREAM, dotColor: VERMILION, background: CHARCOAL } },
-  { name: 'descko-lockup-cream-bg', opts: { letterColor: CHARCOAL, dotColor: VERMILION, background: CREAM } },
 ];
 
 const BASE_WIDTH = 600;
