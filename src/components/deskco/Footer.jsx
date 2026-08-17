@@ -43,7 +43,7 @@ export default function Footer() {
             <h4 className="text-[11px] tracking-label text-cream/40 mb-4">Elsewhere</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a href="https://www.instagram.com/descko" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-cream/80 hover:text-amber transition-colors">
+                <a href="https://www.instagram.com/descko_official" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-cream/80 hover:text-amber transition-colors">
                   <Instagram className="h-4 w-4" /> Instagram
                 </a>
               </li>
