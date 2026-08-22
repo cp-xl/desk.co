@@ -4,26 +4,29 @@ import { ArrowRight } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import Reveal from '@/components/deskco/Reveal';
 
-const FALLBACK_IMAGE =
-  'https://media.base44.com/images/public/6a69b073911fb2aa3df02219/fcddca1c9_generated_8222d48a.png';
-
 // Split hero: numbered lead object on the left, the gifting line on the right.
 export default function HeroSplit({ leadProduct }) {
-  const image = leadProduct?.image || FALLBACK_IMAGE;
-
   return (
     <section className="bg-cream border-t border-maroon/25">
       <div className="mx-auto max-w-focus px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-x divide-charcoal/10">
           <div className="py-8 lg:py-14 lg:pr-12">
             <Reveal variant="fade-up" className="relative">
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-charcoal/5">
-                <Image
-                  src={image}
-                  alt={leadProduct?.name || 'Descko'}
-                  className="h-full w-full object-cover"
-                  fittingType="fill"
-                />
+              {/* No stand-in image: until the lead product loads the frame stays
+                  empty, so the first thing anyone sees is the real product. */}
+              <div
+                className={`relative aspect-[4/5] w-full overflow-hidden bg-charcoal/5 ${
+                  leadProduct?.image ? '' : 'animate-pulse'
+                }`}
+              >
+                {leadProduct?.image && (
+                  <Image
+                    src={leadProduct.image}
+                    alt={leadProduct.name}
+                    className="h-full w-full object-cover"
+                    fittingType="fill"
+                  />
+                )}
                 <span className="absolute top-4 left-4 bg-charcoal/85 text-cream text-[10px] tracking-label px-2 py-1">
                   No. 01
                 </span>
