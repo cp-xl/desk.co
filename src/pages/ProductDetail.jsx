@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Plus, Minus, Check } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import { fetchProductBySlug, fetchProducts } from '@/lib/wixProducts';
 import { buildHeroUrl } from '@/lib/heroImage';
+import { renderRichText } from '@/lib/richText';
 import { useCart } from '@/lib/CartContext';
 import ProductCard from '@/components/deskco/ProductCard';
 import TrustBar from '@/components/deskco/TrustBar';
@@ -34,6 +35,13 @@ export default function ProductDetail() {
         fetchProducts().then((all) => setRelated(all.filter((p) => p.slug !== slug).slice(0, 4)));
       });
   }, [slug]);
+
+  // Parsing the description walks a DOM tree, so keep it off the re-render
+  // path that variant and quantity clicks trigger.
+  const description = useMemo(
+    () => renderRichText(product?.descriptionHtml),
+    [product?.descriptionHtml]
+  );
 
   if (loading) {
     return (
@@ -141,9 +149,13 @@ export default function ProductDetail() {
               {product.inStock ? 'In stock' : 'Not in stock yet.'}
             </p>
 
-            {product.blurb && (
+            {(description || product.blurb) && (
               <div className="mt-8 border-t border-charcoal/15 pt-5">
-                <p className="text-[16px] leading-[1.7] text-charcoal/80">{product.blurb}</p>
+                {description ? (
+                  <div className="space-y-3">{description}</div>
+                ) : (
+                  <p className="text-[15px] leading-[1.7] text-charcoal/80">{product.blurb}</p>
+                )}
               </div>
             )}
 
