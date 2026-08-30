@@ -11,6 +11,9 @@ function deriveCategory(p) {
   return main || names[0] || null;
 }
 
+// Plain-text reduction of the description, for search indexing and card
+// summaries. The product page renders the original markup instead — see
+// `descriptionHtml` and lib/richText.
 function stripTags(html) {
   if (!html) return '';
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -21,7 +24,10 @@ export function mapWixProduct(p) {
   const maxPrice = parseFloat(p.actualPriceRange?.maxValue?.amount || '0');
   const inStock = p.inventory?.availabilityStatus !== 'OUT_OF_STOCK';
   const mainImageUrl = p.media?.main?.image?.url || null;
-  const blurb = stripTags(p.plainDescription);
+  // Wix gives the description as HTML. Keep both: the markup for display, the
+  // flattened text for search.
+  const descriptionHtml = p.plainDescription || '';
+  const blurb = stripTags(descriptionHtml);
 
   const galleryUrls = p.media?.itemsInfo?.items
     ?.filter((i) => i?.image?.url)
@@ -56,6 +62,7 @@ export function mapWixProduct(p) {
     image: mainImageUrl,
     gallery: galleryUrls.length > 0 ? galleryUrls : mainImageUrl ? [mainImageUrl] : [],
     blurb,
+    descriptionHtml,
     variants: variantList,
     wixUrl: p.url?.url || null,
     createdDate: p.createdDate || null,
