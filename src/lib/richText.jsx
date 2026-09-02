@@ -90,19 +90,95 @@ function childrenOf(node) {
   return out.length ? out : null;
 }
 
+function parseBody(html) {
+  if (!html || typeof html !== 'string') return null;
+  // No markup at all: let the caller render it as plain text.
+  if (!/<[a-z][\s\S]*>/i.test(html)) return null;
+  if (typeof DOMParser === 'undefined') return null;
+  // DOMParser builds a detached document: it runs no script and fetches no
+  // subresource, unlike assigning to innerHTML on a live node.
+  return new DOMParser().parseFromString(html, 'text/html').body;
+}
+
+function toReactList(nodes) {
+  const out = [];
+  nodes.forEach((node, i) => {
+    const rendered = toReact(node, i);
+    if (rendered !== null && rendered !== undefined && rendered !== '') out.push(rendered);
+  });
+  return out.length ? out : null;
+}
+
 /**
  * Parses an HTML description into React elements. Returns null when there is
  * nothing to show, so callers can fall back to their plain-text blurb.
  */
 export function renderRichText(html) {
-  if (!html || typeof html !== 'string') return null;
-  // No markup at all: let the caller render it as plain text.
-  if (!/<[a-z][\s\S]*>/i.test(html)) return null;
-  if (typeof DOMParser === 'undefined') return null;
-
-  // DOMParser builds a detached document: it runs no script and fetches no
-  // subresource, unlike assigning to innerHTML on a live node.
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const children = childrenOf(doc.body);
-  return children;
+  const body = parseBody(html);
+  return body ? childrenOf(body) : null;
 }
+
+// Heading text is compared loosely: case, punctuation and "it is"/"it's"/"its"
+// should not decide whether the split happens.
+function headingText(node) {
+  return (node.textContent || '').replace(/\s+/g, ' ').replace(/[:.–—-]+\s*$/, '').trim();
+}
+
+// A heading is a real h1-h6, or a paragraph that is entirely bold — Wix's
+// editor produces the latter when someone bolds a line instead of picking a
+// heading style, and to the writer both look like a heading.
+function headingLevel(node) {
+  if (node.nodeType !== 1) return null;
+  const tag = node.tagName.toUpperCase();
+  if (/^H[1-6]$/.test(tag)) return Number(tag[1]);
+  if (tag !== 'P') return null;
+  const text = (node.textContent || '').trim();
+  if (!text) return null;
+  const bold = [...node.querySelectorAll('strong, b')]
+    .map((el) => (el.textContent || '').trim())
+    .join(' ');
+  return bold === text ? 6 : null;
+}
+
+/**
+ * Pulls one titled section out of a description, so a single field in Wix can
+ * drive two separately styled blocks on the page.
+ *
+ * Everything that is not part of that section stays in `body` (including
+ * anything after it), so no copy is ever dropped.
+ *
+ * Returns `{ body, section }`; `section` is null when the heading is absent,
+ * which is how the caller knows to show its own fallback.
+ */
+export function splitRichText(html, matcher) {
+  const body = parseBody(html);
+  if (!body) return { body: null, section: null };
+
+  const nodes = Array.from(body.childNodes);
+  const startIdx = nodes.findIndex(
+    (n) => headingLevel(n) !== null && matcher.test(headingText(n))
+  );
+  if (startIdx === -1) return { body: toReactList(nodes), section: null };
+
+  // The section runs to the next heading of the same or higher rank.
+  const startLevel = headingLevel(nodes[startIdx]);
+  let endIdx = nodes.length;
+  for (let i = startIdx + 1; i < nodes.length; i += 1) {
+    const level = headingLevel(nodes[i]);
+    if (level !== null && level <= startLevel) {
+      endIdx = i;
+      break;
+    }
+  }
+
+  return {
+    body: toReactList([...nodes.slice(0, startIdx), ...nodes.slice(endIdx)]),
+    section: {
+      title: headingText(nodes[startIdx]),
+      body: toReactList(nodes.slice(startIdx + 1, endIdx)),
+    },
+  };
+}
+
+// Matches the heading the product page pulls out, however it gets typed.
+export const WHY_HEADING = /^why\s+it(?:\s+is|’s|'s|s)?\s+on\s+the\s+list$/i;
