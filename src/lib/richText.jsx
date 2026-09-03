@@ -216,11 +216,18 @@ export function splitRichText(html, phrase) {
   const nodes = Array.from(body.childNodes);
 
   // The heading on its own line.
-  const headingIdx = nodes.findIndex(
-    (n) => headingLevel(n) !== null && exact.test(normalizeText(n))
-  );
+  // A node counts as the heading if its whole text is the phrase — a real
+  // h1-h6, a bolded paragraph, or (the case a plain "type it, press Enter"
+  // edit produces) a paragraph with no special formatting at all. Formatting
+  // is not what makes something a heading here; matching the whole phrase is.
+  const headingIdx = nodes.findIndex((n) => {
+    if (n.nodeType !== 1) return false;
+    const tag = n.tagName.toUpperCase();
+    return (/^H[1-6]$/.test(tag) || tag === 'P') && exact.test(normalizeText(n));
+  });
   if (headingIdx !== -1) {
-    const end = sectionEnd(nodes, headingIdx + 1, headingLevel(nodes[headingIdx]));
+    const level = headingLevel(nodes[headingIdx]) ?? 6;
+    const end = sectionEnd(nodes, headingIdx + 1, level);
     return {
       body: toReactList([...nodes.slice(0, headingIdx), ...nodes.slice(end)]),
       section: {
