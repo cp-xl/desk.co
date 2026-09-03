@@ -53,7 +53,7 @@ export function mapWixProduct(p) {
     name: p.name,
     price,
     maxPrice,
-    priceDisplay: !maxPrice || price === maxPrice ? `$${price}` : `from $${price}`,
+    priceDisplay: `$${price}`,
     optionName: firstOption?.name || null,
     category: deriveCategory(p),
     badge: p.ribbon || null,

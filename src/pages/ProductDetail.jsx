@@ -4,7 +4,7 @@ import { ArrowLeft, Plus, Minus, Check } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import { fetchProductBySlug, fetchProducts } from '@/lib/wixProducts';
 import { buildHeroUrl } from '@/lib/heroImage';
-import { renderRichText } from '@/lib/richText';
+import { splitRichText, WHY_HEADING } from '@/lib/richText';
 import { useCart } from '@/lib/CartContext';
 import ProductCard from '@/components/deskco/ProductCard';
 import TrustBar from '@/components/deskco/TrustBar';
@@ -37,9 +37,11 @@ export default function ProductDetail() {
   }, [slug]);
 
   // Parsing the description walks a DOM tree, so keep it off the re-render
-  // path that variant and quantity clicks trigger.
-  const description = useMemo(
-    () => renderRichText(product?.descriptionHtml),
+  // path that variant and quantity clicks trigger. The "why" block is written
+  // in the same Wix description field, under its own heading, and split back
+  // out here so the two can be styled and placed separately.
+  const { body: description, section: why } = useMemo(
+    () => splitRichText(product?.descriptionHtml, WHY_HEADING),
     [product?.descriptionHtml]
   );
 
@@ -149,7 +151,10 @@ export default function ProductDetail() {
               {product.inStock ? 'In stock' : 'Not in stock yet.'}
             </p>
 
-            {(description || product.blurb) && (
+            {/* The blurb is the whole description flattened, so it stands in
+                only when nothing was parsed at all. Falling back to it while a
+                "why" section is showing would print that copy twice. */}
+            {(description || (!why && product.blurb)) && (
               <div className="mt-8 border-t border-charcoal/15 pt-5">
                 {description ? (
                   <div className="space-y-3">{description}</div>
@@ -159,12 +164,21 @@ export default function ProductDetail() {
               </div>
             )}
 
+            {/* Written per product in the Wix description under a "Why it is
+                on the list" heading. Products without one keep the line that
+                used to be on every page. */}
             <div className="mt-6 border-t border-charcoal/15 pt-5">
-              <p className="text-[11px] tracking-label text-charcoal/40 mb-2">Why it is on the list</p>
-              <p className="text-[15px] leading-[1.65] text-charcoal/70">
-                It does one thing properly, it looks like someone designed it on purpose, and it
-                lands in the range where a gift still reads as a decision.
+              <p className="text-[11px] tracking-label text-charcoal/40 mb-2">
+                {why ? why.title : 'Why it is on the list'}
               </p>
+              {why?.body ? (
+                <div className="space-y-3">{why.body}</div>
+              ) : (
+                <p className="text-[15px] leading-[1.65] text-charcoal/70">
+                  It does one thing properly, it looks like someone designed it on purpose, and it
+                  lands in the range where a gift still reads as a decision.
+                </p>
+              )}
             </div>
 
             {product.variants.length > 1 && (
