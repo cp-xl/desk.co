@@ -120,8 +120,18 @@ export function renderRichText(html) {
 
 // Heading text is compared loosely: case, punctuation and "it is"/"it's"/"its"
 // should not decide whether the split happens.
-function headingText(node) {
-  return (node.textContent || '').replace(/\s+/g, ' ').replace(/[:.–—-]+\s*$/, '').trim();
+function normalizeText(node) {
+  return (node.textContent || '').replace(/\s+/g, ' ').trim();
+}
+
+// The phrase on its own (a real heading) versus the phrase leading a block
+// (someone typed the heading and the copy into one paragraph).
+function matchers(phrase) {
+  const trailing = '\s*[:.\u2013\u2014-]*\s*';
+  return {
+    exact: new RegExp(`^\s*(?:${phrase.source})${trailing}$`, 'i'),
+    prefix: new RegExp(`^\s*(?:${phrase.source})${trailing}`, 'i'),
+  };
 }
 
 // A heading is a real h1-h6, or a paragraph that is entirely bold — Wix's
@@ -132,12 +142,60 @@ function headingLevel(node) {
   const tag = node.tagName.toUpperCase();
   if (/^H[1-6]$/.test(tag)) return Number(tag[1]);
   if (tag !== 'P') return null;
-  const text = (node.textContent || '').trim();
+  const text = normalizeText(node);
   if (!text) return null;
   const bold = [...node.querySelectorAll('strong, b')]
     .map((el) => (el.textContent || '').trim())
     .join(' ');
   return bold === text ? 6 : null;
+}
+
+// Where the pulled-out section ends: the next heading of the same or higher
+// rank, or the end of the description.
+function sectionEnd(nodes, from, level) {
+  for (let i = from; i < nodes.length; i += 1) {
+    const found = headingLevel(nodes[i]);
+    if (found !== null && found <= level) return i;
+  }
+  return nodes.length;
+}
+
+/**
+ * Splits one block that opens with the heading phrase and continues straight
+ * into the copy — `<p><strong>Why it is on the list</strong>It covers…</p>`,
+ * which is what Wix produces when the heading and the body are typed as one
+ * paragraph. Returns the title and a paragraph holding the remainder.
+ */
+function splitInlineHeading(node, prefix) {
+  if (node.nodeType !== 1) return null;
+  const match = prefix.exec(node.textContent || '');
+  if (!match) return null;
+
+  // Walk the children dropping exactly the characters the phrase consumed, so
+  // the copy that follows it in the same block is kept intact.
+  let toDrop = match[0].length;
+  const doc = node.ownerDocument;
+  const rest = doc.createElement('p');
+  for (const child of Array.from(node.childNodes)) {
+    const text = child.textContent || '';
+    if (toDrop >= text.length) {
+      toDrop -= text.length;
+      continue;
+    }
+    if (toDrop > 0) {
+      if (child.nodeType === 3) {
+        rest.appendChild(doc.createTextNode(text.slice(toDrop)));
+      } else {
+        rest.appendChild(child.cloneNode(true));
+      }
+      toDrop = 0;
+      continue;
+    }
+    rest.appendChild(child.cloneNode(true));
+  }
+
+  if (!normalizeText(rest)) return null; // heading only — the caller's first pass handles that
+  return { title: match[0].trim().replace(/[:.–—\s-]+$/, ''), rest };
 }
 
 /**
@@ -150,35 +208,45 @@ function headingLevel(node) {
  * Returns `{ body, section }`; `section` is null when the heading is absent,
  * which is how the caller knows to show its own fallback.
  */
-export function splitRichText(html, matcher) {
+export function splitRichText(html, phrase) {
   const body = parseBody(html);
   if (!body) return { body: null, section: null };
 
+  const { exact, prefix } = matchers(phrase);
   const nodes = Array.from(body.childNodes);
-  const startIdx = nodes.findIndex(
-    (n) => headingLevel(n) !== null && matcher.test(headingText(n))
-  );
-  if (startIdx === -1) return { body: toReactList(nodes), section: null };
 
-  // The section runs to the next heading of the same or higher rank.
-  const startLevel = headingLevel(nodes[startIdx]);
-  let endIdx = nodes.length;
-  for (let i = startIdx + 1; i < nodes.length; i += 1) {
-    const level = headingLevel(nodes[i]);
-    if (level !== null && level <= startLevel) {
-      endIdx = i;
-      break;
-    }
+  // The heading on its own line.
+  const headingIdx = nodes.findIndex(
+    (n) => headingLevel(n) !== null && exact.test(normalizeText(n))
+  );
+  if (headingIdx !== -1) {
+    const end = sectionEnd(nodes, headingIdx + 1, headingLevel(nodes[headingIdx]));
+    return {
+      body: toReactList([...nodes.slice(0, headingIdx), ...nodes.slice(end)]),
+      section: {
+        title: normalizeText(nodes[headingIdx]).replace(/[:.–—\s-]+$/, ''),
+        body: toReactList(nodes.slice(headingIdx + 1, end)),
+      },
+    };
   }
 
-  return {
-    body: toReactList([...nodes.slice(0, startIdx), ...nodes.slice(endIdx)]),
-    section: {
-      title: headingText(nodes[startIdx]),
-      body: toReactList(nodes.slice(startIdx + 1, endIdx)),
-    },
-  };
+  // The heading run together with its copy in one block.
+  for (let i = 0; i < nodes.length; i += 1) {
+    const inline = splitInlineHeading(nodes[i], prefix);
+    if (!inline) continue;
+    // Treated as the weakest heading, so any following heading closes it.
+    const end = sectionEnd(nodes, i + 1, 6);
+    return {
+      body: toReactList([...nodes.slice(0, i), ...nodes.slice(end)]),
+      section: {
+        title: inline.title,
+        body: toReactList([inline.rest, ...nodes.slice(i + 1, end)]),
+      },
+    };
+  }
+
+  return { body: toReactList(nodes), section: null };
 }
 
-// Matches the heading the product page pulls out, however it gets typed.
-export const WHY_HEADING = /^why\s+it(?:\s+is|’s|'s|s)?\s+on\s+the\s+list$/i;
+// The phrase the product page pulls out, however it gets typed.
+export const WHY_PHRASE = /why\s+it(?:\s+is|’s|'s|s)?\s+on\s+the\s+list/i;

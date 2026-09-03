@@ -4,7 +4,7 @@ import { ArrowLeft, Plus, Minus, Check } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import { fetchProductBySlug, fetchProducts } from '@/lib/wixProducts';
 import { buildHeroUrl } from '@/lib/heroImage';
-import { splitRichText, WHY_HEADING } from '@/lib/richText';
+import { splitRichText, WHY_PHRASE } from '@/lib/richText';
 import { useCart } from '@/lib/CartContext';
 import ProductCard from '@/components/deskco/ProductCard';
 import TrustBar from '@/components/deskco/TrustBar';
@@ -41,7 +41,7 @@ export default function ProductDetail() {
   // in the same Wix description field, under its own heading, and split back
   // out here so the two can be styled and placed separately.
   const { body: description, section: why } = useMemo(
-    () => splitRichText(product?.descriptionHtml, WHY_HEADING),
+    () => splitRichText(product?.descriptionHtml, WHY_PHRASE),
     [product?.descriptionHtml]
   );
 
