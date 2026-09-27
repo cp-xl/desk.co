@@ -24,22 +24,19 @@ export default function About() {
         <div className="mt-8 max-w-xl space-y-5 text-[16px] leading-[1.7] text-charcoal/75">
           <p>
             You know the feeling. Your name comes out of the Secret Santa hat, your best
-            friend’s birthday is in two weeks, or you just like buying yourself things for
-            the desk. Either way, you end up scrolling four hundred near-identical listings,
-            and none of them read as a gift.
+            friend's birthday is in two weeks, or you just want to treat your own desk.
+            Either way, you end up scrolling four hundred near-identical listings, and none
+            of them feel like a gift.
           </p>
           <p>
             So we keep a short list instead. Sound, desk gear, and small things that do one
-            job properly. Mostly $25 to $80. That’s the range where a present still feels like
-            a decision.
+            job properly. Mostly $25 to $80, which is the range where a gift still feels like
+            a decision, not a default.
           </p>
-          <p>
-            Here’s the thing about gifting: nobody wants to overthink it, and nobody wants to
-            be forgettable either. You want to hand over something good, watch their face do
-            the thing, and not have to think about it again after that.
-          </p>
-          <p>Short list, clear prices, no aisle to walk.</p>
         </div>
+        <p className="mt-8 font-display text-2xl sm:text-3xl text-charcoal max-w-xl">
+          Short list, clear prices, no aisle to walk.
+        </p>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {VALUES.map((v, i) => (

@@ -45,15 +45,14 @@ export default function HeroSplit({ leadProduct }) {
             </Reveal>
             <Reveal variant="fade-up" delay={80}>
               <h1 className="font-display text-charcoal leading-[0.92] text-[44px] sm:text-[58px] lg:text-[66px]">
-                For someone<br />who has<br />everything<br />
-                <span className="text-maroon">boring.</span>
+                Desk gear<br />that actually<br />feels like<br />
+                <span className="text-maroon">you picked it.</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={160}>
               <p className="mt-7 max-w-md text-[16px] leading-[1.65] text-charcoal/75">
-                A short list of tech you will not find at the local chain store. Speakers,
-                keyboards, clocks, desk gear. Mostly $25 to $80, which is the range where a
-                present still looks like a decision.
+                Stuff you won't find at the local chain store. Speakers, keyboards, clocks,
+                desk gear. Mostly $25 to $80, so it's never a stretch and never feels random.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={240}>

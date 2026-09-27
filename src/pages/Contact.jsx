@@ -19,14 +19,15 @@ export default function Contact() {
 
           <div className="mt-10 border border-charcoal/15 p-6 sm:p-8">
             <p className="text-[13px] leading-relaxed text-charcoal/70">
-              The form here isn't wired up yet. Until it is, email{' '}
+              Email us at{' '}
               <a
                 href="mailto:hello@descko.com"
                 className="text-maroon underline underline-offset-4"
               >
                 hello@descko.com
               </a>{' '}
-              with your order number if you have one. Replies inside one business day.
+              with your order number if you have one. A real person replies, usually within
+              one business day.
             </p>
             <a
               href="mailto:hello@descko.com"

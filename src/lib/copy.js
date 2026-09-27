@@ -46,6 +46,7 @@ export const HOW_IT_WORKS = [
 export const TRUST = [
   'Orders arrive in 5 to 12 business days',
   'Thirty-day returns, unopened or as-new',
+  'Returns sorted by email, no form maze',
 ];
 
 export const MARQUEE = [

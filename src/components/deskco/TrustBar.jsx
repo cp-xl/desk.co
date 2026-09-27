@@ -5,7 +5,7 @@ export default function TrustBar() {
   return (
     <section className="border-y border-charcoal/10 bg-cream">
       <div className="mx-auto max-w-focus px-4 sm:px-6">
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6">
+        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-6">
           {TRUST.map((t) => (
             <li
               key={t}

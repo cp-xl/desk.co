@@ -17,9 +17,8 @@ export default function ThinkingBand() {
         </div>
         <div className="space-y-5 text-[16px] leading-[1.65] text-charcoal/75">
           <p>
-            Most gift tech is bought in a hurry and gone by February. This is the opposite of
-            that: a short list of finds that hold up, in the range where a gift still reads
-            as a decision.
+            Most gift tech gets bought in a rush and forgotten by February. This is the
+            opposite: stuff that actually holds up, long after the wrapping paper's in the bin.
           </p>
           <p>
             Everything here does one job well and still looks good on a desk a year later.
