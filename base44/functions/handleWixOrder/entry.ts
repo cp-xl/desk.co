@@ -32,10 +32,14 @@ function toRecord(order: any, eventType: string) {
   };
 }
 
+function esc(v: unknown) {
+  return String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
+}
+
 function emailBody(rec: any, heading: string, prevStatus?: string) {
-  const items = rec.line_items.map((i: any) => `<li>${i.quantity} × ${i.name} ${i.price}</li>`).join('');
-  const change = prevStatus && prevStatus !== rec.status ? `<p>Status: ${prevStatus} → ${rec.status}</p>` : `<p>Status: ${rec.status}</p>`;
-  return `<h2>${heading}</h2><p>Order #${rec.order_number}</p>${change}<p>${rec.customer_name} (${rec.email})</p><ul>${items}</ul><p>Total: ${rec.total}</p>`;
+  const items = rec.line_items.map((i: any) => `<li>${esc(i.quantity)} × ${esc(i.name)} ${esc(i.price)}</li>`).join('');
+  const change = prevStatus && prevStatus !== rec.status ? `<p>Status: ${esc(prevStatus)} → ${esc(rec.status)}</p>` : `<p>Status: ${esc(rec.status)}</p>`;
+  return `<h2>${esc(heading)}</h2><p>Order #${esc(rec.order_number)}</p>${change}<p>${esc(rec.customer_name)} (${esc(rec.email)})</p><ul>${items}</ul><p>Total: ${esc(rec.total)}</p>`;
 }
 
 export default async function (req: Request): Promise<Response> {
@@ -65,6 +69,11 @@ export default async function (req: Request): Promise<Response> {
     if (existing) await base44.asServiceRole.entities.Order.update(existing.id, rec);
     else await base44.asServiceRole.entities.Order.create(rec);
 
+    // Only notify on a new order or a real status change, so replayed calls can't flood admin inboxes.
+    if (existing && existing.status === rec.status) {
+      return Response.json({ ok: true, status: rec.status, notified: false });
+    }
+
     const heading = eventType.endsWith('order_created') ? 'New order'
       : eventType.endsWith('order_canceled') ? 'Order cancelled, stop fulfilment' : 'Order updated';
 
@@ -72,7 +81,7 @@ export default async function (req: Request): Promise<Response> {
     for (const a of admins) {
       await base44.asServiceRole.integrations.Core.SendEmail({
         to: a.email,
-        subject: `${heading}: #${rec.order_number}`,
+        subject: `${heading}: #${rec.order_number.replace(/[^\w-]/g, '')}`,
         body: emailBody(rec, heading, existing?.status),
       });
     }
