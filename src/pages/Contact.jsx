@@ -26,8 +26,8 @@ export default function Contact() {
               >
                 hello@descko.com
               </a>{' '}
-              with your order number if you have one. A real person replies, usually within
-              one business day.
+              with your order number if you have one. A real person will read it and get
+              back to you, usually within one business day.
             </p>
             <a
               href="mailto:hello@descko.com"

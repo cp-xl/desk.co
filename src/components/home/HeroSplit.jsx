@@ -45,7 +45,7 @@ export default function HeroSplit({ leadProduct }) {
             </Reveal>
             <Reveal variant="fade-up" delay={80}>
               <h1 className="font-display text-charcoal leading-[0.92] text-[44px] sm:text-[58px] lg:text-[66px]">
-                Desk gear<br />that actually<br />feels like<br />
+                Desk gear<br />that feels like<br />
                 <span className="text-maroon">you picked it.</span>
               </h1>
             </Reveal>
