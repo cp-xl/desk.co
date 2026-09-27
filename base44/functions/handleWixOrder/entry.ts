@@ -33,6 +33,15 @@ function toRecord(order: any, eventType: string) {
   };
 }
 
+const SYNC_TOKEN = 'f852a9b03a78904565e5cce9fbc942c20c46729f3409230dda5233b89d0a1870';
+
+function timingSafeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
 function esc(v: unknown) {
   return String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
 }
@@ -47,6 +56,10 @@ export default async function (req: Request): Promise<Response> {
   try {
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
+    // Only the Wix Order Sync workflow (which receives the verified Wix webhook) knows this token.
+    if (!timingSafeEqual(String(body?.sync_token ?? ''), SYNC_TOKEN)) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     const eventType = body?.data?.metadata?.eventType || body?.data?.eventType;
     const orderId = body?.data?.metadata?.entityId || body?.data?.entity?.id;
 
