@@ -38,8 +38,27 @@ async function resolveVariantId(accessToken, productId, choiceName) {
   return match?.id || null;
 }
 
+// Per-IP limit: at most RATE_MAX checkouts per RATE_WINDOW_MS. Best effort, held per server instance.
+const RATE_MAX = 10;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_MAX) { hits.set(ip, recent); return true; }
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return false;
+}
+
 export default async function (req: Request): Promise<Response> {
   try {
+    const ip = (req.headers.get('cf-connecting-ip') || req.headers.get('x-forwarded-for') || 'unknown').split(',')[0].trim();
+    if (rateLimited(ip)) {
+      return Response.json({ error: 'Too many checkout attempts. Try again in a few minutes.' }, { status: 429 });
+    }
     const base44 = createClientFromRequest(req);
     const { accessToken } = await base44.asServiceRole.connectors.getConnection('wix');
 
