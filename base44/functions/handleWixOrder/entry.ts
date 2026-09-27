@@ -2,8 +2,9 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.49';
 
 const EVENTS = ['wix.ecom.v1.order_created', 'wix.ecom.v1.order_updated', 'wix.ecom.v1.order_canceled'];
 
-function toStatus(order: any, eventType: string) {
-  if (eventType.endsWith('order_canceled') || order.status === 'CANCELED') return 'cancelled';
+// Status comes only from the order as Wix reports it, never from the caller's claimed event type.
+function toStatus(order: any) {
+  if (order.status === 'CANCELED') return 'cancelled';
   if (order.fulfillmentStatus === 'FULFILLED') return 'fulfilled';
   if (order.paymentStatus === 'PAID') return 'paid';
   return 'new';
@@ -14,7 +15,7 @@ function toRecord(order: any, eventType: string) {
   return {
     wix_order_id: order.id,
     order_number: String(order.number ?? ''),
-    status: toStatus(order, eventType),
+    status: toStatus(order),
     payment_status: order.paymentStatus || '',
     fulfillment_status: order.fulfillmentStatus || '',
     customer_name: [contact.firstName, contact.lastName].filter(Boolean).join(' '),
@@ -74,8 +75,8 @@ export default async function (req: Request): Promise<Response> {
       return Response.json({ ok: true, status: rec.status, notified: false });
     }
 
-    const heading = eventType.endsWith('order_created') ? 'New order'
-      : eventType.endsWith('order_canceled') ? 'Order cancelled, stop fulfilment' : 'Order updated';
+    const heading = !existing ? 'New order'
+      : rec.status === 'cancelled' ? 'Order cancelled, stop fulfilment' : 'Order updated';
 
     const admins = await base44.asServiceRole.entities.User.filter({ role: 'admin' });
     for (const a of admins) {
