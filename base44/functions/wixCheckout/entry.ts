@@ -103,6 +103,7 @@ export default async function (req: Request): Promise<Response> {
 
     return Response.json({ url, checkoutId });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error('wixCheckout failed:', error);
+    return Response.json({ error: 'Could not start checkout' }, { status: 500 });
   }
 }
