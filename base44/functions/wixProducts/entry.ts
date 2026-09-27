@@ -83,6 +83,7 @@ export default async function (req: Request): Promise<Response> {
     const names = await fetchCategoryNames(accessToken);
     return Response.json({ products: withCategoryNames(products, names) });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error('wixProducts failed:', error);
+    return Response.json({ error: 'Could not load products' }, { status: 500 });
   }
 }
