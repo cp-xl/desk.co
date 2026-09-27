@@ -1,0 +1,93 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "wix_order_id": {
+      "type": "string",
+      "description": "Wix order id, unique"
+    },
+    "order_number": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "paid",
+        "fulfilled",
+        "cancelled"
+      ],
+      "default": "new"
+    },
+    "payment_status": {
+      "type": "string"
+    },
+    "fulfillment_status": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "line_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "total": {
+      "type": "string"
+    },
+    "total_amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "ordered_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "raw_event_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "wix_order_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

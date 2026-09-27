@@ -1,0 +1,42 @@
+{
+  "description": "Saves Wix orders to the Orders dashboard and emails admins on create, update and cancel.",
+  "trigger": {
+    "condition": "${ .trigger.data.metadata.eventType | IN(\"wix.ecom.v1.order_created\", \"wix.ecom.v1.order_updated\", \"wix.ecom.v1.order_canceled\") }",
+    "config": {
+      "trigger_type": "connector",
+      "events": [
+        "wix.ecom.v1.order_created",
+        "wix.ecom.v1.order_updated",
+        "wix.ecom.v1.order_canceled"
+      ],
+      "integration_type": "wix",
+      "resource_id": null
+    }
+  },
+  "name": "Wix Order Sync",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "wix_order_sync",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "sync_order": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "handleWixOrder",
+            "args": {
+              "data": "${ .trigger.data }"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Save order and email admins"
+          }
+        }
+      }
+    ]
+  }
+}
