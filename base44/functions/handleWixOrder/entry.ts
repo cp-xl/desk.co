@@ -33,7 +33,7 @@ function toRecord(order: any, eventType: string) {
   };
 }
 
-const SYNC_TOKEN = 'f852a9b03a78904565e5cce9fbc942c20c46729f3409230dda5233b89d0a1870';
+const SYNC_TOKEN = Deno.env.get('WIX_ORDER_SYNC_TOKEN') || '';
 
 function timingSafeEqual(a: string, b: string) {
   if (a.length !== b.length) return false;
@@ -57,7 +57,7 @@ export default async function (req: Request): Promise<Response> {
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
     // Only the Wix Order Sync workflow (which receives the verified Wix webhook) knows this token.
-    if (!timingSafeEqual(String(body?.sync_token ?? ''), SYNC_TOKEN)) {
+    if (!SYNC_TOKEN || !timingSafeEqual(String(body?.sync_token ?? ''), SYNC_TOKEN)) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const eventType = body?.data?.metadata?.eventType || body?.data?.eventType;

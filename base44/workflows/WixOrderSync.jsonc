@@ -29,7 +29,7 @@
             "function_name": "handleWixOrder",
             "args": {
               "data": "${ .trigger.data }",
-              "sync_token": "f852a9b03a78904565e5cce9fbc942c20c46729f3409230dda5233b89d0a1870"
+              "sync_token": "88e03094517cb4c8d1e4828b13ad1a5a0ef9da3b8345f4ceb81260051ada46dd"
             }
           },
           "then": "end",
