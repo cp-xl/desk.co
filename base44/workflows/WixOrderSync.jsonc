@@ -28,8 +28,7 @@
           "with": {
             "function_name": "handleWixOrder",
             "args": {
-              "data": "${ .trigger.data }",
-              "sync_token": "88e03094517cb4c8d1e4828b13ad1a5a0ef9da3b8345f4ceb81260051ada46dd"
+              "data": "${ .trigger.data }"
             }
           },
           "then": "end",

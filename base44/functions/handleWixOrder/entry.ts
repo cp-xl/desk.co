@@ -33,13 +33,18 @@ function toRecord(order: any, eventType: string) {
   };
 }
 
-const SYNC_TOKEN = Deno.env.get('WIX_ORDER_SYNC_TOKEN') || '';
+// Per-IP limit. Generous, because legitimate calls from the sync workflow may share an IP.
+const WINDOW_MS = 60_000;
+const MAX_PER_WINDOW = 60;
+const hits = new Map<string, number[]>();
 
-function timingSafeEqual(a: string, b: string) {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return diff === 0;
+function rateLimited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > MAX_PER_WINDOW;
 }
 
 function esc(v: unknown) {
@@ -54,12 +59,12 @@ function emailBody(rec: any, heading: string, prevStatus?: string) {
 
 export default async function (req: Request): Promise<Response> {
   try {
+    const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+    if (rateLimited(ip)) {
+      return Response.json({ error: 'Too many requests' }, { status: 429 });
+    }
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
-    // Only the Wix Order Sync workflow (which receives the verified Wix webhook) knows this token.
-    if (!SYNC_TOKEN || !timingSafeEqual(String(body?.sync_token ?? ''), SYNC_TOKEN)) {
-      return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    }
     const eventType = body?.data?.metadata?.eventType || body?.data?.eventType;
     const orderId = body?.data?.metadata?.entityId || body?.data?.entity?.id;
 
